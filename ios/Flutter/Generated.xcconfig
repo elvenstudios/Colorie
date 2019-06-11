@@ -1,7 +1,7 @@
 // This is a generated file; do not edit or check into version control.
 FLUTTER_ROOT=/Users/ndavis/Code/flutter
-FLUTTER_APPLICATION_PATH=/Users/ndavis/Code/Colorie/colorie
-FLUTTER_TARGET=/Users/ndavis/Code/Colorie/colorie/lib/main.dart
+FLUTTER_APPLICATION_PATH=/Users/ndavis/Code/Colorie
+FLUTTER_TARGET=/Users/ndavis/Code/Colorie/lib/main.dart
 FLUTTER_BUILD_DIR=build
 SYMROOT=${SOURCE_ROOT}/../build/ios
 FLUTTER_FRAMEWORK_DIR=/Users/ndavis/Code/flutter/bin/cache/artifacts/engine/ios
