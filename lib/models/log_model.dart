@@ -3,7 +3,7 @@ import './log_item_model.dart';
 ///
 /// Log class
 /// A list of log items
-/// 
+///
 class Log {
   List<LogItem> _log = [];
 
