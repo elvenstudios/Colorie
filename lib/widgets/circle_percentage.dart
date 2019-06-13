@@ -22,7 +22,7 @@ class _CirclePercentageState extends State<CirclePercentage> {
           )
         ],
       ),
-      margin: EdgeInsets.all(16.0),
+      margin: EdgeInsets.only(top: 30.0, bottom: 16.0, right: 16.0, left: 16.0),
       width: 225.0,
       height: 225.0,
       child: CustomPaint(
