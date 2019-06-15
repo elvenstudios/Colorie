@@ -1,4 +1,4 @@
-#Wed Jun 12 20:51:53 CDT 2019
+#Sat Jun 15 08:49:52 CDT 2019
 base.0=C\:\\Users\\10nda\\Documents\\Code\\Colorie\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

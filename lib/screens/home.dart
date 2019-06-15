@@ -6,6 +6,19 @@ class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
   final String title;
 
+  List rawList = [
+    {
+      'calories': 100,
+      'grams': 200,
+      'name': 'Beans'
+    },
+    {
+      'calories': 200,
+      'grams': 210,
+      'name': 'Corn'
+    }
+  ];
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -37,7 +50,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: <Widget>[
             CirclePercentage(),
-            CardList(),
+            CardList(rawList: widget.rawList,),
           ],
         ),
       ),
