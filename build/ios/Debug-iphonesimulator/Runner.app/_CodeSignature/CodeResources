@@ -114,7 +114,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		x0z3LwbTT2q/JCDHw1jpKXTXBy8=
+		NWe84KDHQKE7eF0vnsLbTpA3ATY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -122,15 +122,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		S+36bfdRwvB1GqEJQLvYDQ0i/YI=
+		lvy4O0vq06/qh1QIrOMEXi5YMY4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+		f1Uu7M2Fho1FVFBuZlxq9RfjbSM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		8Eg+f3qfbnydCo65zUUTI2L/o/k=
+		Jn/QUX4XBr38QLVdi7s7ayfZCpM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/LICENSE</key>
 		<data>
@@ -146,7 +146,11 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		WwX2O6fG9qKzCpPu2x5R4k50MbU=
+		zKjrkKPIYwNptd81ZHqKCQV+chE=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/lib/assets/fonts/raleway/Raleway-Regular.ttf</key>
+		<data>
+		FQFbv7lAfcp5jyZYk1Ql3EdYM3g=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -484,11 +488,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x0z3LwbTT2q/JCDHw1jpKXTXBy8=
+			NWe84KDHQKE7eF0vnsLbTpA3ATY=
 			</data>
 			<key>hash2</key>
 			<data>
-			dYnlFHnHnc0UfmTzS6FVLgMfXvu4F/6tboOxCI9iVtU=
+			lQWwy77KEkVxYR589oDZfFqlAq1sDwLy6kLU2Eny+zM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -506,33 +510,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			S+36bfdRwvB1GqEJQLvYDQ0i/YI=
+			lvy4O0vq06/qh1QIrOMEXi5YMY4=
 			</data>
 			<key>hash2</key>
 			<data>
-			zAII7T4W4+Y/37RH7BtoDn3EhVRuhlmdNAn1aMjNHSo=
+			5KU6ev+rWCaCS9Wz208gY5rHVHemIHcPkvm0cWIdLwM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+			f1Uu7M2Fho1FVFBuZlxq9RfjbSM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sps95+7JukayebvM0TLjL1LW1VXXndpKp/O8tOm9ZR8=
+			h8wQS4yO+VYMyXRhbkzXxBZjQFZPgse5tmLun95+TO8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8Eg+f3qfbnydCo65zUUTI2L/o/k=
+			Jn/QUX4XBr38QLVdi7s7ayfZCpM=
 			</data>
 			<key>hash2</key>
 			<data>
-			+vlc4DeQNrQqihrbyAQ+GfLyhJJmk3V8JJTsYL09FIs=
+			Uj+ctpm6bQCBCOAre/qtlM3B03qC/Q0AiBr9QiXb+hw=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/LICENSE</key>
@@ -572,11 +576,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WwX2O6fG9qKzCpPu2x5R4k50MbU=
+			zKjrkKPIYwNptd81ZHqKCQV+chE=
 			</data>
 			<key>hash2</key>
 			<data>
-			gz1xUY+2RQv/vjZW5dzahCu/QVNCowEyErmyzedPPdQ=
+			IGc+9UwitF8uQvJuFTMn9AuK7AfUh5fRO72fyVU+O4g=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/lib/assets/fonts/raleway/Raleway-Regular.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FQFbv7lAfcp5jyZYk1Ql3EdYM3g=
+			</data>
+			<key>hash2</key>
+			<data>
+			BHYySaXaThwLL/B8HQnwpVKeHUvkBfdY1bHmilMiQ7U=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

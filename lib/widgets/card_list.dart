@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:colorie/widgets/color_card.dart';
+import 'package:colorie/models/log_model.dart';
 
 class CardList extends StatefulWidget {
-  CardList({Key key, this.rawList}) : super(key: key);
-  final List rawList;
+  CardList({Key key, this.list}) : super(key: key);
+  final Log list;
+
 
   String getGreenPercentage() {
-    //TODO: get average percentage of green
-    return '20%';
+    print(list.getGreenPercentage());
+    return "${(list.getGreenPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getYellowPercentage() {
-    //TODO: get average percentage of yellow
-    return '20%';
+    return "${(list.getYellowPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getOrangePercentage() {
-    //TODO: get average percentage of orange
-    return '20%';
+    return "${(list.getOrangePercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getRedPercentage() {
-    //TODO: get average percentage of red
-    return '20%';
+    return "${(list.getRedPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   @override
