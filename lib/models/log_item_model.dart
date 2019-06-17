@@ -6,8 +6,8 @@
 ///
 class LogItem {
 
-  final double calories;
-  final double grams;
+  final num calories;
+  final num grams;
 
   LogItem({this.calories, this.grams});
 

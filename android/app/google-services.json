@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "581092006123",
+    "firebase_url": "https://testing-ba2c5.firebaseio.com",
+    "project_id": "testing-ba2c5",
+    "storage_bucket": "testing-ba2c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581092006123:android:5598fef648350458",
+        "android_client_info": {
+          "package_name": "com.example.colorie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581092006123-nj02pp1n7cko08f7qnpqc3t8jt8gj0l2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAskByVhdjmC36DWZQY-a5ireFMYxgZ6as"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581092006123-nj02pp1n7cko08f7qnpqc3t8jt8gj0l2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "581092006123-d4ne4ck2coil933i61l0f3ac98t47f5b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.colorie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

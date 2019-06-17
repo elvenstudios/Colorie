@@ -24,26 +24,26 @@ class Log {
   }
 
   getGreenPercentage() {
-    int filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'green').length;
+    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'green').length;
 
     return filterLength / this.length();
 
   }
 
   getYellowPercentage() {
-    int filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'yellow').length;
+    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'yellow').length;
 
     return filterLength / this.length();
   }
 
   getOrangePercentage() {
-    int filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'orange').length;
+    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'orange').length;
 
     return filterLength / this.length();
   }
 
   getRedPercentage() {
-    int filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'red').length;
+    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'red').length;
 
     return filterLength / this.length();
   }
