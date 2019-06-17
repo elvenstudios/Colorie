@@ -1,1 +1,1 @@
-../../../FirebaseFirestore/Firestore/core/src/firebase/firestore/util/objc_compatibility.h
+../../../FirebaseFirestore/Firestore/core/src/firebase/firestore/objc/objc_compatibility.h

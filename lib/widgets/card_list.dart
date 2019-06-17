@@ -8,6 +8,7 @@ class CardList extends StatefulWidget {
 
 
   String getGreenPercentage() {
+    print(list.getLog());
     return "${(list.getGreenPercentage() * 100).toStringAsFixed(1)}%";
   }
 

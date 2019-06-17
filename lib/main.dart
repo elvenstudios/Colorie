@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Screens/home.dart';
+import 'Screens/lading_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: Home(title: 'Colorie'),
+      home: LandingPage(),
       debugShowCheckedModeBanner: false,
     );
   }

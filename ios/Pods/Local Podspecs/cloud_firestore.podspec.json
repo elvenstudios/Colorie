@@ -22,17 +22,11 @@
     "Flutter": [
 
     ],
-    "Firebase/Database": [
-
-    ],
     "Firebase/Core": [
 
     ],
-    "Firebase/Auth": [
-
-    ],
     "Firebase/Firestore": [
-
+      "~> 6.0"
     ]
   },
   "static_framework": true
