@@ -23,29 +23,28 @@ class Log {
     return _log;
   }
 
-  getGreenPercentage() {
-    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'green').length;
-
-    return filterLength / this.length();
+  double getGreenPercentage() {
+    double green = _log.where((logItem) => logItem.getColorFromDensity() == 'green').fold(0, (curr, next) => curr + next.calories);
+    return green / this.getTotalCalories();
 
   }
 
   getYellowPercentage() {
-    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'yellow').length;
+    double yellow = _log.where((logItem) => logItem.getColorFromDensity() == 'yellow').fold(0, (curr, next) => curr + next.calories);
 
-    return filterLength / this.length();
+    return yellow / this.getTotalCalories();
   }
 
   getOrangePercentage() {
-    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'orange').length;
+    double orange = _log.where((logItem) => logItem.getColorFromDensity() == 'orange').fold(0, (curr, next) => curr + next.calories);
 
-    return filterLength / this.length();
+    return orange / this.getTotalCalories();
   }
 
   getRedPercentage() {
-    num filterLength = _log.where((logItem) => logItem.getColorFromDensity() == 'red').length;
+    double red = _log.where((logItem) => logItem.getColorFromDensity() == 'red').fold(0, (curr, next) => curr + next.calories);
 
-    return filterLength / this.length();
+    return red / this.getTotalCalories();
   }
 
   num getTotalCalories() {

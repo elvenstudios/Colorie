@@ -1,9 +1,10 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\Flutter\flutter
-FLUTTER_APPLICATION_PATH=C:\Users\10nda\Documents\Code\Colorie
-FLUTTER_TARGET=lib/main.dart
+FLUTTER_ROOT=/Users/ndavis/Code/flutter
+FLUTTER_APPLICATION_PATH=/Users/ndavis/Code/Colorie
+FLUTTER_TARGET=/Users/ndavis/Code/Colorie/lib/main.dart
 FLUTTER_BUILD_DIR=build
-SYMROOT=${SOURCE_ROOT}/../build\ios
-FLUTTER_FRAMEWORK_DIR=C:\Flutter\flutter\bin\cache\artifacts\engine\ios
+SYMROOT=${SOURCE_ROOT}/../build/ios
+FLUTTER_FRAMEWORK_DIR=/Users/ndavis/Code/flutter/bin/cache/artifacts/engine/ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
+TRACK_WIDGET_CREATION=true
