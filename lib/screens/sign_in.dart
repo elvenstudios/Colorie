@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             RaisedButton(
-              child: Text('Sign in anonymously'),
+              child: Text('Sign In'),
               onPressed: _signInAnonymously,
             ),
           ],
