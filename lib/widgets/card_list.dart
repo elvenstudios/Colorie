@@ -8,19 +8,26 @@ class CardList extends StatefulWidget {
 
 
   String getGreenPercentage() {
-    print(list.getLog());
+    if((list.getGreenPercentage() * 100).isNaN)
+      return '0%';
     return "${(list.getGreenPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getYellowPercentage() {
+    if((list.getYellowPercentage() * 100).isNaN)
+      return '0%';
     return "${(list.getYellowPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getOrangePercentage() {
+    if((list.getOrangePercentage() * 100).isNaN)
+      return '0%';
     return "${(list.getOrangePercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getRedPercentage() {
+    if((list.getRedPercentage() * 100).isNaN)
+      return '0%';
     return "${(list.getRedPercentage() * 100).toStringAsFixed(1)}%";
   }
 
