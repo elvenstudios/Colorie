@@ -6,6 +6,8 @@ import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
@@ -48,7 +50,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    DateTime today = new DateTime.now();
+    String formattedToday = "${today.month}/${today.day}/${today.year}";
+
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(40.0), // here the desired height
+          child: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black
+            ),
+          )
+      ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -59,7 +76,6 @@ class _HomeState extends State<Home> {
                   fontSize: 20.0,
                 ),
               ),
-              decoration: new BoxDecoration(color: Colors.greenAccent),
             ),
             ListTile(
               title: Text("Settings"),
@@ -84,7 +100,7 @@ class _HomeState extends State<Home> {
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('logs').document(widget.user.email).collection('log').snapshots(),
+            stream: Firestore.instance.collection('logs').document(widget.user.email).collection('log').where('date', isEqualTo: formattedToday).snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError)

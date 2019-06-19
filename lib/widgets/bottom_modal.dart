@@ -25,6 +25,9 @@ class _BottomModalState extends State<BottomModal> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime today = new DateTime.now();
+    String formattedToday = "${today.month}/${today.day}/${today.year}";
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -58,6 +61,7 @@ class _BottomModalState extends State<BottomModal> {
                       'name': foodNameController.text,
                       'calories': int.parse(calController.text),
                       'grams': int.parse(gramsController.text),
+                      'date': formattedToday,
                     },
                   );
                 },
