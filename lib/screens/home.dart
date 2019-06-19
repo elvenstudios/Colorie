@@ -1,4 +1,3 @@
-import 'package:colorie/widgets/bottom_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:colorie/widgets/card_list.dart';
@@ -7,6 +6,7 @@ import 'package:colorie/models/log_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:colorie/screens/add_to_log.dart';
 
 
 class Home extends StatefulWidget {
@@ -35,17 +35,11 @@ addItem() {
 }
 
 class _HomeState extends State<Home> {
-  void _showModalSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return Container(
-            child: BottomModal(
-              user: widget.user,
-            ),
-            padding: EdgeInsets.all(40.0),
-          );
-        });
+  void _addItemToLog() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddToLogScreen()),
+    );
   }
 
   @override
@@ -131,7 +125,7 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.blueAccent,
-        onPressed: _showModalSheet,
+        onPressed: _addItemToLog,
         icon: Icon(Icons.add_circle),
         label: Text("Log Food"),
       ),
