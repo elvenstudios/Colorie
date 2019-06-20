@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
   void _addItemToLog() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddToLogScreen()),
+      MaterialPageRoute(builder: (context) => AddToLogScreen(user: widget.user,)),
     );
   }
 
@@ -51,14 +51,11 @@ class _HomeState extends State<Home> {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40.0), // here the desired height
-          child: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
-              color: Colors.black
-            ),
-          )
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ),
       ),
       drawer: Drawer(
         child: ListView(
