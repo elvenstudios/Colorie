@@ -82,7 +82,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		bDQHG4k1SHitFqtvS/bTNzMalJs=
+		pC4SjJa+4Bryp0UiFHKH9YjMO0w=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		vJVwUpCJ+k53jg0Mm7mQ9QU0PTQ=
+		MUSEYYTYkQ+ftPfzgtLUGns8r/c=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -122,15 +122,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		3iAyVqqR5C97KHWK8F0rxNIckGg=
+		zwVxP3wwGI3sEpYslRGUN7YyOHU=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		f1Uu7M2Fho1FVFBuZlxq9RfjbSM=
+		gnhALXaSyk9vZEhZoCOdhfFlZgs=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		Jn/QUX4XBr38QLVdi7s7ayfZCpM=
+		bBmv3aWcu5iS/gM0SS2wUUANfd0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/LICENSE</key>
 		<data>
@@ -146,7 +146,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		aNCzSxmVKNm6q7ExLI2QseHBCm4=
+		NvZLNBerdan39U6Heak9goYxZcQ=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/fonts/raleway/Raleway-Regular.ttf</key>
 		<data>
@@ -155,6 +155,10 @@
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		AlgKy1FbEPcZcd0kdJLLHtOy68I=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/feather_icons_flutter/lib/fonts/feathericons.ttf</key>
+		<data>
+		j3WbXDGMGAAREO1kIi/e3oPCTg4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/vm_snapshot_data</key>
 		<data>
@@ -432,11 +436,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bDQHG4k1SHitFqtvS/bTNzMalJs=
+			pC4SjJa+4Bryp0UiFHKH9YjMO0w=
 			</data>
 			<key>hash2</key>
 			<data>
-			FU11IwhLQjoW4iyOs9hVW8Xhyd081aOoqWPe2PEt/t8=
+			d6hB8HnBGhG+AzUkYxGT1uaCjD7g+W2gOZyOYAeXUws=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -520,11 +524,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vJVwUpCJ+k53jg0Mm7mQ9QU0PTQ=
+			MUSEYYTYkQ+ftPfzgtLUGns8r/c=
 			</data>
 			<key>hash2</key>
 			<data>
-			MrXIkwLDnbveutCU83Ebny3upcJjRpsYxYEQ3o8J/1A=
+			Imim6WKuT2lidMVmj6hUgK8MNEo8UU/XkBifh4mk9fk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -542,33 +546,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3iAyVqqR5C97KHWK8F0rxNIckGg=
+			zwVxP3wwGI3sEpYslRGUN7YyOHU=
 			</data>
 			<key>hash2</key>
 			<data>
-			9GUn/6Y1Ap4jXVor6qgZ1UYai4MGjSiRfrgjzWXJDU4=
+			0MwzPRJt9wU1ndAzR7CgQRnIoixQGm49517JObswFAo=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			f1Uu7M2Fho1FVFBuZlxq9RfjbSM=
+			gnhALXaSyk9vZEhZoCOdhfFlZgs=
 			</data>
 			<key>hash2</key>
 			<data>
-			h8wQS4yO+VYMyXRhbkzXxBZjQFZPgse5tmLun95+TO8=
+			1gNJ510XM6BWt9tZfnENKgkjnn+g40riP5hzyRkeudQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Jn/QUX4XBr38QLVdi7s7ayfZCpM=
+			bBmv3aWcu5iS/gM0SS2wUUANfd0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Uj+ctpm6bQCBCOAre/qtlM3B03qC/Q0AiBr9QiXb+hw=
+			9AvKRMyxC2GxXNnFhG579iNEdJ+ByjwCoWMXfR2gzRQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/LICENSE</key>
@@ -608,11 +612,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aNCzSxmVKNm6q7ExLI2QseHBCm4=
+			NvZLNBerdan39U6Heak9goYxZcQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			4AKqdXhaBnOH+qIZCe0f1kAu3lRQUoUPaWnVuCLqy0U=
+			vZEms0EXCBsU3r/TraW/6mAiW/SdsufTgEbLM50Nzn0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/lib/assets/fonts/raleway/Raleway-Regular.ttf</key>
@@ -635,6 +639,17 @@
 			<key>hash2</key>
 			<data>
 			ETQZmaktT/cBMTCTNJd49hWX7HSYPa18vp5zuIwK13c=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/feather_icons_flutter/lib/fonts/feathericons.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			j3WbXDGMGAAREO1kIi/e3oPCTg4=
+			</data>
+			<key>hash2</key>
+			<data>
+			3rwxGPX+syc1KicN3u6l4JNyJ4Ss0OUFpJ4okbo+9II=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/vm_snapshot_data</key>

@@ -1,7 +1,0 @@
-#Tue Jun 18 08:35:51 CDT 2019
-base.0=/Users/ndavis/Code/Colorie/build/app/intermediates/transforms/dexMerger/release/0
-path.1=classes2.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=/Users/ndavis/Code/Colorie/build/app/intermediates/transforms/dexMerger/release/0
