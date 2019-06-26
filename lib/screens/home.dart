@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
   final user;
 
   LogItem convertToLogItem(item) {
-    return new LogItem(calories: item['calories'], grams: item['grams']);
+    return new LogItem(calories: item['calories'], grams: item['grams'], name: item['name']);
   }
 
   @override
@@ -88,36 +88,40 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('logs').document(widget.user.email).collection('log').where('date', isEqualTo: formattedToday).snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError)
-                return new Text('Error: ${snapshot.error}');
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return new Text('Loading...');
-                default:
-                  Log formattedList = new Log();
+        child: ListView(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only( top: 10.0, bottom: 60.0, ),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: Firestore.instance.collection('logs').document(widget.user.email).collection('log').where('date', isEqualTo: formattedToday).snapshots(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError)
+                    return new Text('Error: ${snapshot.error}');
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Text('Loading...');
+                    default:
+                      Log formattedList = new Log();
 
-                  snapshot.data.documents.forEach((item) =>
-                      {formattedList.add(widget.convertToLogItem(item))});
+                      snapshot.data.documents.forEach((item) =>
+                          {formattedList.add(widget.convertToLogItem(item))});
 
-                  return SafeArea(
-                    child: Column(
-                      children: <Widget>[
-                        CirclePercentage(
-                          totalCalories: formattedList.getTotalCalories(),
+                      return SafeArea(
+                        child: Column(
+                          children: <Widget>[
+                            CirclePercentage(
+                              totalCalories: formattedList.getTotalCalories(),
+                            ),
+                            CardList(list: formattedList),
+                          ],
                         ),
-                        CardList(list: formattedList),
-                      ],
-                    ),
-                  );
-              }
-            },
-          ),
+                      );
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

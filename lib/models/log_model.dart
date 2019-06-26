@@ -47,6 +47,22 @@ class Log {
     return red / this.getTotalCalories();
   }
 
+  getGreenLogItems() {
+    return _log.where((logItem) => logItem.getColorFromDensity() == 'green');
+  }
+
+  getYellowLogItems() {
+    return _log.where((logItem) => logItem.getColorFromDensity() == 'yellow');
+  }
+
+  getOrangeLogItems() {
+    return _log.where((logItem) => logItem.getColorFromDensity() == 'orange');
+  }
+
+  getRedLogItems() {
+    return _log.where((logItem) => logItem.getColorFromDensity() == 'red');
+  }
+
   num getTotalCalories() {
     num sum = 0;
     _log.forEach((e){sum += e.calories;});

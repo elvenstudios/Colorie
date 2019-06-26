@@ -8,8 +8,9 @@ class LogItem {
 
   final num calories;
   final num grams;
+  final String name;
 
-  LogItem({this.calories, this.grams});
+  LogItem({this.calories, this.grams, this.name});
 
   /*
    * Calculates calorie density based on calories and grams
