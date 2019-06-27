@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ColorCard extends StatefulWidget {
   ColorCard({
@@ -8,15 +10,22 @@ class ColorCard extends StatefulWidget {
     this.subtext,
     this.percentageTitle,
     this.logItems,
+    this.user,
   }) : super(key: key);
+
   final Color borderColor;
   final String title;
   final String subtext;
   final String percentageTitle;
   final logItems;
+  final user;
 
   @override
   _ColorCardState createState() => _ColorCardState();
+
+  void deleteItem(item) {
+    //TODO: make delete from firebase
+  }
 }
 
 class _ColorCardState extends State<ColorCard> {
@@ -145,6 +154,13 @@ class _ColorCardState extends State<ColorCard> {
                 return ListTile(
                   title: Text(item.name),
                   subtitle: Text("${item.calories.toString()} calories"),
+                  trailing: IconButton(
+                    icon: Icon(FeatherIcons.xCircle, color: Colors.pinkAccent,),
+                    tooltip: 'Remove Item From Log',
+                    onPressed: () {
+                      widget.deleteItem(item);
+                    },
+                  ),
                 );
               },
             ),

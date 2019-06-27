@@ -3,9 +3,9 @@ import 'package:colorie/widgets/color_card.dart';
 import 'package:colorie/models/log_model.dart';
 
 class CardList extends StatefulWidget {
-  CardList({Key key, this.list, this.isExpanded = false}) : super(key: key);
+  CardList({Key key, this.list, this.user,}) : super(key: key);
   final Log list;
-  bool isExpanded;
+  final user;
 
   String getGreenPercentage() {
     if((list.getGreenPercentage() * 100).isNaN)
@@ -46,6 +46,7 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 60% or more',
           percentageTitle: widget.getGreenPercentage(),
           logItems: widget.list.getGreenLogItems(),
+          user: widget.user,
         ),
         ColorCard(
           title: 'Plenty',
@@ -53,6 +54,7 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 25% or more',
           percentageTitle: widget.getYellowPercentage(),
           logItems: widget.list.getYellowLogItems(),
+          user: widget.user,
         ),
         ColorCard(
           title: 'Some',
@@ -60,6 +62,7 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 10% or less',
           percentageTitle: widget.getOrangePercentage(),
           logItems: widget.list.getOrangeLogItems(),
+          user: widget.user,
         ),
         ColorCard(
           title: 'Few',
@@ -67,6 +70,7 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 5% or less',
           percentageTitle: widget.getRedPercentage(),
           logItems: widget.list.getRedLogItems(),
+          user: widget.user,
         ),
       ],
     );

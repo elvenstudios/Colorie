@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
   final user;
 
   LogItem convertToLogItem(item) {
-    return new LogItem(calories: item['calories'], grams: item['grams'], name: item['name']);
+    return new LogItem(calories: item['calories'], grams: item['grams'], name: item['name'], ref: item);
   }
 
   @override
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                             CirclePercentage(
                               totalCalories: formattedList.getTotalCalories(),
                             ),
-                            CardList(list: formattedList),
+                            CardList(list: formattedList, user: widget.user,),
                           ],
                         ),
                       );
