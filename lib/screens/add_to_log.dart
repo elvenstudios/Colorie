@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddToLogScreen extends StatefulWidget {
   final user;
-  AddToLogScreen({Key key, this.user}) : super(key: key);
+  final selectedDay;
+
+  AddToLogScreen({Key key, this.user, this.selectedDay,}) : super(key: key);
 
   @override
   _AddToLogScreenState createState() => _AddToLogScreenState();
@@ -25,9 +27,7 @@ class _AddToLogScreenState extends State<AddToLogScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime today = new DateTime.now();
-    String formattedToday = "${today.month}/${today.day}/${today.year}";
-
+    String formattedDay = "${widget.selectedDay.month}/${widget.selectedDay.day}/${widget.selectedDay.year}";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -79,7 +79,7 @@ class _AddToLogScreenState extends State<AddToLogScreen> {
                         'name': foodNameController.text,
                         'calories': int.parse(calController.text),
                         'grams': int.parse(gramsController.text),
-                        'date': formattedToday,
+                        'date': formattedDay,
                       },
                     );
                     Navigator.pop(context);

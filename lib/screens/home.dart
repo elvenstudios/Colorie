@@ -8,15 +8,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:colorie/screens/add_to_log.dart';
 
-
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
 
   final String title;
   final user;
+  final DateTime today = new DateTime.now();
 
   LogItem convertToLogItem(item) {
-    return new LogItem(calories: item['calories'], grams: item['grams'], name: item['name'], ref: item);
+    return new LogItem(
+        calories: item['calories'],
+        grams: item['grams'],
+        name: item['name'],
+        ref: item);
   }
 
   @override
@@ -30,32 +34,51 @@ getUserName(name) {
   return 'User';
 }
 
-addItem() {
-  print('pressed');
-}
-
 class _HomeState extends State<Home> {
+
+  DateTime selectedDay = new DateTime.now();
+
   void _addItemToLog() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddToLogScreen(user: widget.user,)),
+      MaterialPageRoute(
+        builder: (context) => AddToLogScreen(
+              user: widget.user,
+              selectedDay: selectedDay
+            ),
+      ),
     );
+  }
+
+  _incrementDay() {
+    if ((widget.today.day == selectedDay.day) &&
+        (widget.today.month == selectedDay.month) &&
+        (widget.today.year == selectedDay.year)) {
+      return false;
+    } else {
+      setState(() {
+        selectedDay = selectedDay.add(new Duration(days: 1));
+      });
+    }
+  }
+
+  _decrementDay() {
+    setState(() {
+      selectedDay = selectedDay.subtract(new Duration(days: 1));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    DateTime today = new DateTime.now();
-    String formattedToday = "${today.month}/${today.day}/${today.year}";
+    String formattedToday =
+        "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}";
 
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black
-        ),
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer: Drawer(
         child: ListView(
@@ -91,11 +114,19 @@ class _HomeState extends State<Home> {
         child: ListView(
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.only( top: 10.0, bottom: 60.0, ),
+              padding: const EdgeInsets.only(
+                top: 10.0,
+                bottom: 60.0,
+              ),
               child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance.collection('logs').document(widget.user.email).collection('log').where('date', isEqualTo: formattedToday).snapshots(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                stream: Firestore.instance
+                    .collection('logs')
+                    .document(widget.user.email)
+                    .collection('log')
+                    .where('date', isEqualTo: formattedToday)
+                    .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError)
                     return new Text('Error: ${snapshot.error}');
                   switch (snapshot.connectionState) {
@@ -110,10 +141,29 @@ class _HomeState extends State<Home> {
                       return SafeArea(
                         child: Column(
                           children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                MaterialButton(
+                                  child: Icon(Icons.arrow_back),
+                                  onPressed: _decrementDay,
+                                ),
+                                Text(
+                                  "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
+                                ),
+                                MaterialButton(
+                                  child: Icon(Icons.arrow_forward),
+                                  onPressed: _incrementDay,
+                                ),
+                              ],
+                            ),
                             CirclePercentage(
                               totalCalories: formattedList.getTotalCalories(),
                             ),
-                            CardList(list: formattedList, user: widget.user,),
+                            CardList(
+                              list: formattedList,
+                              user: widget.user,
+                            ),
                           ],
                         ),
                       );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ColorCard extends StatefulWidget {
   ColorCard({
