@@ -38,54 +38,59 @@ class _AddToLogScreenState extends State<AddToLogScreen> {
         ),
       ),
       body: Container(
-        child: Column(
+        padding: EdgeInsets.all(16.0),
+        child: ListView(
           children: <Widget>[
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: foodNameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-                border: InputBorder.none,
-              ),
-            ),
-            TextField(
-              keyboardType: TextInputType.number,
-              controller: calController,
-              decoration: InputDecoration(
-                labelText: 'Calories',
-                border: InputBorder.none,
-              ),
-            ),
-            TextField(
-              keyboardType: TextInputType.number,
-              controller: gramsController,
-              decoration: InputDecoration(
-                labelText: 'Grams',
-                border: InputBorder.none,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Column(
               children: <Widget>[
-                FloatingActionButton.extended(
-                  backgroundColor: Colors.blueAccent,
-                  onPressed: () {
-                    Firestore.instance
-                        .collection('logs')
-                        .document(widget.user.email)
-                        .collection('log')
-                        .add(
-                      {
-                        'name': foodNameController.text,
-                        'calories': int.parse(calController.text),
-                        'grams': int.parse(gramsController.text),
-                        'date': formattedDay,
+                TextField(
+                  keyboardType: TextInputType.text,
+                  controller: foodNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: InputBorder.none,
+                  ),
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: calController,
+                  decoration: InputDecoration(
+                    labelText: 'Calories',
+                    border: InputBorder.none,
+                  ),
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: gramsController,
+                  decoration: InputDecoration(
+                    labelText: 'Grams',
+                    border: InputBorder.none,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FloatingActionButton.extended(
+                      backgroundColor: Colors.blueAccent,
+                      onPressed: () {
+                        Firestore.instance
+                            .collection('logs')
+                            .document(widget.user.email)
+                            .collection('log')
+                            .add(
+                          {
+                            'name': foodNameController.text,
+                            'calories': int.parse(calController.text),
+                            'grams': int.parse(gramsController.text),
+                            'date': formattedDay,
+                          },
+                        );
+                        Navigator.pop(context);
                       },
-                    );
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.add_circle),
-                  label: Text("Log Food"),
+                      icon: Icon(Icons.add_circle),
+                      label: Text("Log Food"),
+                    ),
+                  ],
                 ),
               ],
             ),

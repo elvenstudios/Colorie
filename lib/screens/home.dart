@@ -78,7 +78,28 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+
         iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
+        title: Row(
+          children: <Widget>[
+            MaterialButton(
+              child: Icon(Icons.arrow_back),
+              onPressed: _decrementDay,
+            ),
+            Text(
+              "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+
+            ),
+            MaterialButton(
+              child: Icon(Icons.arrow_forward),
+              onPressed: _incrementDay,
+            ),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -141,22 +162,6 @@ class _HomeState extends State<Home> {
                       return SafeArea(
                         child: Column(
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                MaterialButton(
-                                  child: Icon(Icons.arrow_back),
-                                  onPressed: _decrementDay,
-                                ),
-                                Text(
-                                  "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
-                                ),
-                                MaterialButton(
-                                  child: Icon(Icons.arrow_forward),
-                                  onPressed: _incrementDay,
-                                ),
-                              ],
-                            ),
                             CirclePercentage(
                               totalCalories: formattedList.getTotalCalories(),
                             ),

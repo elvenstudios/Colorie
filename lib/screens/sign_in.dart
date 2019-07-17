@@ -1,3 +1,4 @@
+import 'package:colorie/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
@@ -26,6 +27,13 @@ class _SignInState extends State<SignIn> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  _navigateToSignUp() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignUp()),
+    );
   }
 
   @override
@@ -154,10 +162,14 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Center(
+            child: InkWell(
               child: Text(
-            'Sign Up',
-            style: TextStyle(color: Colors.grey, fontSize: 16.0),
-          )),
+                'Sign Up',
+                style: TextStyle(color: Colors.grey, fontSize: 16.0),
+              ),
+              onTap: _navigateToSignUp,
+            ),
+          ),
         ],
       ),
     );

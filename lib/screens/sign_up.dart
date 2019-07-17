@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
-  Future<void> _signIn() async {
+class _SignUpState extends State<SignUp> {
+  Future<void> _signUp() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+      Navigator.pop(context);
     } catch (e) {
       print(e); // TODO: show dialog with error
     }
@@ -26,6 +27,10 @@ class _SignInState extends State<SignIn> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  _navigateToSignIn() {
+    Navigator.pop(context);
   }
 
   @override
@@ -99,6 +104,23 @@ class _SignInState extends State<SignIn> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: <Widget>[
+                        Icon(FeatherIcons.lock),
+                        Container(
+                          padding: EdgeInsets.only(left: 8.0),
+                          width: 275.0,
+                          child: TextField(
+                            obscureText: true,
+                            controller: null,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: 'Confirm Password',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -112,13 +134,13 @@ class _SignInState extends State<SignIn> {
                 RawMaterialButton(
                   fillColor: Colors.green,
                   splashColor: Colors.greenAccent,
-                  onPressed: _signIn,
+                  onPressed: _signUp,
                   child: Container(
                     width: 300.0,
                     height: 50.0,
                     child: Center(
                       child: Text(
-                        'Sign In',
+                        'Sign Up',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
@@ -154,10 +176,14 @@ class _SignInState extends State<SignIn> {
             ),
           ),
           Center(
+            child: InkWell(
               child: Text(
-            'Sign Up',
-            style: TextStyle(color: Colors.grey, fontSize: 16.0),
-          )),
+                'Sign In',
+                style: TextStyle(color: Colors.grey, fontSize: 16.0),
+              ),
+              onTap: _navigateToSignIn,
+            ),
+          ),
         ],
       ),
     );
