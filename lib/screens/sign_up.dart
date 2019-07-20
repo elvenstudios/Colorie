@@ -23,7 +23,7 @@ class _SignUpState extends State<SignUp> {
         Navigator.pop(context);
       } catch (e) {
         print(e);
-        Alert(context: context, title: "Error", desc: e.toString()).show();
+        Alert(context: context, title: e.code, desc: e.message).show();
       }
     }
   }
