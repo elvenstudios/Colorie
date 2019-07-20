@@ -14,7 +14,7 @@ class _SignUpState extends State<SignUp> {
       Alert(context: context, title: "Error", desc: "Please enter an Email").show();
     }else if(passwordController.text.isEmpty){
       Alert(context: context, title: "Error", desc: "Please enter a Password").show();
-    }else if(passwordController.text!=confirmPasswordController.text){
+    }else if(passwordController.text != confirmPasswordController.text){
       Alert(context: context, title: "Error", desc: "Passwords do not match!").show();
     }else{
       try {
