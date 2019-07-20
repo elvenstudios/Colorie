@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -9,23 +10,34 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   Future<void> _signUp() async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      Navigator.pop(context);
-    } catch (e) {
-      print(e); // TODO: show dialog with error
+    if (emailController.text.isEmpty) {
+      Alert(context: context, title: "Error", desc: "Please enter an Email").show();
+    }else if(passwordController.text.isEmpty){
+      Alert(context: context, title: "Error", desc: "Please enter a Password").show();
+    }else if(passwordController.text!=confirmPasswordController.text){
+      Alert(context: context, title: "Error", desc: "Passwords do not match!").show();
+    }else{
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+        Navigator.pop(context);
+      } catch (e) {
+        print(e);
+        Alert(context: context, title: "Error", desc: e.toString()).show();
+      }
     }
   }
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -112,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                           width: 275.0,
                           child: TextField(
                             obscureText: true,
-                            controller: null,
+                            controller: confirmPasswordController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               labelText: 'Confirm Password',
