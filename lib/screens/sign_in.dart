@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
       } catch (e) {
-        Alert(context: context, title: "Error", desc: e.toString()).show();
+        Alert(context: context, title: e.code, desc: e.message).show();
       }
     }
   }

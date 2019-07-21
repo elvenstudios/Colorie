@@ -156,3 +156,12 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/dart,flutter,intellij
+*.xml
+*.xml
+*.ser
+*.properties
+*.xml
+*.bin
+*.lock
+*.xml
+*.ser
