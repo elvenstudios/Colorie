@@ -68,6 +68,13 @@ class _HomeState extends State<Home> {
     });
   }
 
+  _setDay() {
+    setState(() {
+      selectedDay = new DateTime.now();
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     String formattedToday =
@@ -78,14 +85,18 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-
         iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
+        titleSpacing: 0.0,
         title: Row(
           children: <Widget>[
             MaterialButton(
               child: Icon(Icons.arrow_back),
               onPressed: _decrementDay,
+            ),
+            MaterialButton(
+              child: Icon(Icons.calendar_today),
+              onPressed: _setDay,
             ),
             Text(
               "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
@@ -158,6 +169,7 @@ class _HomeState extends State<Home> {
 
                       snapshot.data.documents.forEach((item) =>
                           {formattedList.add(widget.convertToLogItem(item))});
+
 
                       return SafeArea(
                         child: Column(
