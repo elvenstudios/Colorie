@@ -11,10 +11,10 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   Future<void> _signUp() async {
     if (emailController.text.isEmpty) {
-      Alert(context: context, title: "Error", desc: "Please enter and Email").show();
+      Alert(context: context, title: "Error", desc: "Please enter an Email").show();
     }else if(passwordController.text.isEmpty){
       Alert(context: context, title: "Error", desc: "Please enter a Password").show();
-    }else if(passwordController.text != confirmPasswordController.text){
+    }else if(passwordController.text!=confirmPasswordController.text){
       Alert(context: context, title: "Error", desc: "Passwords do not match!").show();
     }else{
       try {
@@ -22,7 +22,8 @@ class _SignUpState extends State<SignUp> {
             email: emailController.text, password: passwordController.text);
         Navigator.pop(context);
       } catch (e) {
-        Alert(context: context, title: e.code, desc: e.message).show();
+        print(e);
+        Alert(context: context, title: "Error", desc: e.toString()).show();
       }
     }
   }

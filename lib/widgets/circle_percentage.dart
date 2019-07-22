@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './circle_painter.dart';
-import 'package:colorie/models/log_model.dart';
 
 class CirclePercentage extends StatefulWidget {
 
