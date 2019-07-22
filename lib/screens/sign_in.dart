@@ -2,6 +2,7 @@ import 'package:colorie/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -10,11 +11,17 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   Future<void> _signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-    } catch (e) {
-      print(e); // TODO: show dialog with error
+    if (emailController.text.isEmpty) {
+      Alert(context: context, title: "Error", desc: "Blank Email").show();
+    }else if(passwordController.text.isEmpty){
+      Alert(context: context, title: "Error", desc: "Blank Password").show();
+    }else {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+      } catch (e) {
+        Alert(context: context, title: e.code, desc: e.message).show();
+      }
     }
   }
 
