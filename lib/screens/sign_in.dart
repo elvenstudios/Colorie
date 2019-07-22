@@ -13,9 +13,9 @@ class _SignInState extends State<SignIn> {
   Future<void> _signIn() async {
     if (emailController.text.isEmpty) {
       Alert(context: context, title: "Error", desc: "Blank Email").show();
-    }else if(passwordController.text.isEmpty){
+    } else if (passwordController.text.isEmpty) {
       Alert(context: context, title: "Error", desc: "Blank Password").show();
-    }else {
+    } else {
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
