@@ -65,9 +65,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-  _setDay() {
+  _setToCurrentDay() {
     setState(() {
-      selectedDay = new DateTime.now();
+      selectedDay = widget.today;
     });
   }
 
@@ -92,7 +92,7 @@ class _HomeState extends State<Home> {
             ),
             MaterialButton(
               child: Icon(Icons.calendar_today),
-              onPressed: _setDay,
+              onPressed: _setToCurrentDay,
             ),
             Text(
               "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
