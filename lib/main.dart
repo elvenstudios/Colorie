@@ -4,10 +4,7 @@ import 'package:flutter/services.dart';
 
 
 void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]) //Lock orientation in Portrait
-      .then((_) {
-    runApp(MyApp());
-  });
+  SystemChrome.setPreferredOrientations( [DeviceOrientation.portraitUp], ).then( (_) => runApp(MyApp()), );
 }
 
 class MyApp extends StatelessWidget {
