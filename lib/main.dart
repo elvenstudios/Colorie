@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'Screens/lading_page.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
-  SystemChrome.setPreferredOrientations( [DeviceOrientation.portraitUp], ).then( (_) => runApp(MyApp()), );
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  ).then(
+    (_) => runApp(MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
