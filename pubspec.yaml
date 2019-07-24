@@ -63,10 +63,10 @@ flutter:
   # example:
 
   fonts:
-    - family: Raleway
-      fonts:
-        # https://fonts.google.com/specimen/Raleway
-        - asset: lib/assets/fonts/raleway/Raleway-Regular.ttf
+  - family: Raleway
+    fonts:
+    # https://fonts.google.com/specimen/Raleway
+    - asset: lib/assets/fonts/raleway/Raleway-Regular.ttf
 
 
   # fonts:
