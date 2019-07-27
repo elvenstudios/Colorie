@@ -7,6 +7,9 @@ import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
+import 'package:colorie/providers/log_provider.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
@@ -37,7 +40,7 @@ getUserName(name) {
 class _HomeState extends State<Home> {
   DateTime selectedDay = new DateTime.now();
 
-  void _addItemToLog() {
+  void _goToAddItemScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -47,30 +50,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  _incrementDay() {
-    if ((widget.today.day == selectedDay.day) &&
-        (widget.today.month == selectedDay.month) &&
-        (widget.today.year == selectedDay.year)) {
-      return false;
-    } else {
-      setState(() {
-        selectedDay = selectedDay.add(new Duration(days: 1));
-      });
-    }
-  }
-
-  _decrementDay() {
-    setState(() {
-      selectedDay = selectedDay.subtract(new Duration(days: 1));
-    });
-  }
-
-  _setToCurrentDay() {
-    setState(() {
-      selectedDay = widget.today;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     String formattedToday =
@@ -78,120 +57,113 @@ class _HomeState extends State<Home> {
 
     SystemChrome.setEnabledSystemUIOverlays([]);
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.calendar_today),
-            onPressed: _setToCurrentDay,
-          ),
-        ],
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        centerTitle: true,
-        titleSpacing: 0.0,
-        title: Row(
-          children: <Widget>[
-            MaterialButton(
-              child: Icon(Icons.arrow_back),
-              onPressed: _decrementDay,
-            ),
-            Text(
-              "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            MaterialButton(
-              child: Icon(Icons.arrow_forward),
-              onPressed: _incrementDay,
-            ),
-          ],
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: Text(
-                getUserName(widget.user.email),
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text("Settings"),
-              leading: Icon(Icons.settings),
-            ),
-            ListTile(
-              title: Text("Log Out"),
-              leading: Icon(Icons.account_circle),
-              onTap: () {
-                Navigator.pop(context);
-                FirebaseAuth.instance.signOut();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => LogProvider()),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            Consumer<LogProvider>(
+              builder: (context, logProvider, __) {
+                return IconButton(
+                  icon: Icon(Icons.calendar_today),
+                  onPressed: logProvider.setToCurrentDay,
+                );
               },
             ),
-            ListTile(
-              title: Text("Remove Ads"),
-              leading: Icon(Icons.play_arrow),
-            )
           ],
-        ),
-      ),
-      body: Center(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-                bottom: 60.0,
-              ),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance
-                    .collection('logs')
-                    .document(widget.user.email)
-                    .collection('log')
-                    .where('date', isEqualTo: formattedToday)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError)
-                    return new Text('Error: ${snapshot.error}');
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return new Text('Loading...');
-                    default:
-                      Log formattedList = new Log();
-
-                      snapshot.data.documents.forEach((item) =>
-                          {formattedList.add(widget.convertToLogItem(item))});
-
-                      return SafeArea(
-                        child: Column(
-                          children: <Widget>[
-                            CirclePercentage(
-                              totalCalories: formattedList.getTotalCalories(),
-                            ),
-                            CardList(
-                              list: formattedList,
-                              user: widget.user,
-                            ),
-                          ],
-                        ),
-                      );
-                  }
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          centerTitle: true,
+          titleSpacing: 0.0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return MaterialButton(
+                    child: Icon(Icons.arrow_back),
+                    onPressed: logProvider.decrementDay,
+                  );
                 },
               ),
-            ),
-          ],
+
+              Text(
+                "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return MaterialButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: logProvider.incrementDay,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.blueAccent,
-        onPressed: _addItemToLog,
-        icon: Icon(Icons.add_circle),
-        label: Text("Log Food"),
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(
+                  getUserName(widget.user.email),
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text("Settings"),
+                leading: Icon(Icons.settings),
+              ),
+              ListTile(
+                title: Text("Log Out"),
+                leading: Icon(Icons.account_circle),
+                onTap: () {
+                  Navigator.pop(context);
+                  FirebaseAuth.instance.signOut();
+                },
+              ),
+              ListTile(
+                title: Text("Remove Ads"),
+                leading: Icon(Icons.play_arrow),
+              )
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return CirclePercentage(
+                    totalCalories: logProvider.log.getTotalCalories(),
+                  );
+                },
+              ),
+
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return CardList(
+                    list: logProvider.log,
+                    user: widget.user,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blueAccent,
+          onPressed: _goToAddItemScreen,
+          icon: Icon(Icons.add_circle),
+          label: Text("Log Food"),
+        ),
       ),
     );
   }
