@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:colorie/widgets/circle_percentage.dart';
-import 'package:colorie/widgets/card_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:colorie/screens/add_to_log.dart';
+import 'package:colorie/widgets/card_list.dart';
+import 'package:colorie/widgets/circle_percentage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
@@ -80,6 +80,12 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.calendar_today),
+            onPressed: _setToCurrentDay,
+          ),
+        ],
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
@@ -89,10 +95,6 @@ class _HomeState extends State<Home> {
             MaterialButton(
               child: Icon(Icons.arrow_back),
               onPressed: _decrementDay,
-            ),
-            MaterialButton(
-              child: Icon(Icons.calendar_today),
-              onPressed: _setToCurrentDay,
             ),
             Text(
               "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
