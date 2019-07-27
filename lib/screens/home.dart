@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:colorie/widgets/circle_percentage.dart';
-import 'package:colorie/widgets/card_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:colorie/screens/add_to_log.dart';
+import 'package:colorie/widgets/card_list.dart';
+import 'package:colorie/widgets/circle_percentage.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'settings.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
@@ -121,19 +122,13 @@ class _HomeState extends State<Home> {
             ListTile(
               title: Text("Settings"),
               leading: Icon(Icons.settings),
-            ),
-            ListTile(
-              title: Text("Log Out"),
-              leading: Icon(Icons.account_circle),
               onTap: () {
-                Navigator.pop(context);
-                FirebaseAuth.instance.signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
               },
             ),
-            ListTile(
-              title: Text("Remove Ads"),
-              leading: Icon(Icons.play_arrow),
-            )
           ],
         ),
       ),
