@@ -16,11 +16,12 @@ class Home extends StatefulWidget {
   final DateTime today = new DateTime.now();
 
   LogItem convertToLogItem(item) {
-    return new LogItem(
-        calories: item['calories'],
-        grams: item['grams'],
-        name: item['name'],
-        ref: item);
+    return new LogItem({
+      'calories': item['calories'],
+      'grams': item['grams'],
+      'name': item['name'],
+      'ref': item
+    });
   }
 
   @override
@@ -48,15 +49,9 @@ class _HomeState extends State<Home> {
   }
 
   _incrementDay() {
-    if ((widget.today.day == selectedDay.day) &&
-        (widget.today.month == selectedDay.month) &&
-        (widget.today.year == selectedDay.year)) {
-      return false;
-    } else {
-      setState(() {
-        selectedDay = selectedDay.add(new Duration(days: 1));
-      });
-    }
+    setState(() {
+      selectedDay = selectedDay.add(new Duration(days: 1));
+    });
   }
 
   _decrementDay() {

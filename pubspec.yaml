@@ -23,6 +23,8 @@ dependencies:
   cloud_firestore: ^0.12.5 # add this line
   firebase_auth: ^0.11.1
   feather_icons_flutter: ^4.7.4
+  sqflite: ^1.1.6
+  path_provider: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -51,7 +53,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+  - assets/database.db
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
@@ -68,10 +71,10 @@ flutter:
   # example:
 
   fonts:
-    - family: Raleway
-      fonts:
-        # https://fonts.google.com/specimen/Raleway
-        - asset: lib/assets/fonts/raleway/Raleway-Regular.ttf
+  - family: Raleway
+    fonts:
+    # https://fonts.google.com/specimen/Raleway
+    - asset: lib/assets/fonts/raleway/Raleway-Regular.ttf
 
 
   # fonts:
