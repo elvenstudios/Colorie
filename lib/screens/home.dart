@@ -1,15 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colorie/models/log_item_model.dart';
-import 'package:colorie/models/log_model.dart';
+import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/add_to_log.dart';
 import 'package:colorie/widgets/card_list.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart';
-import 'package:colorie/providers/log_provider.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
@@ -19,11 +17,12 @@ class Home extends StatefulWidget {
   final DateTime today = new DateTime.now();
 
   LogItem convertToLogItem(item) {
-    return new LogItem(
-        calories: item['calories'],
-        grams: item['grams'],
-        name: item['name'],
-        ref: item);
+    return new LogItem({
+      'calories': item['calories'],
+      'grams': item['grams'],
+      'name': item['name'],
+      'ref': item
+    });
   }
 
   @override
@@ -52,11 +51,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedToday =
-        "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}";
-
     SystemChrome.setEnabledSystemUIOverlays([]);
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(builder: (_) => LogProvider()),
@@ -88,7 +83,6 @@ class _HomeState extends State<Home> {
                   );
                 },
               ),
-
               Text(
                 "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
                 style: TextStyle(
@@ -124,6 +118,7 @@ class _HomeState extends State<Home> {
               ListTile(
                 title: Text("Log Out"),
                 leading: Icon(Icons.account_circle),
+                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
                   FirebaseAuth.instance.signOut();
@@ -146,7 +141,6 @@ class _HomeState extends State<Home> {
                   );
                 },
               ),
-
               Consumer<LogProvider>(
                 builder: (context, logProvider, __) {
                   return CardList(
