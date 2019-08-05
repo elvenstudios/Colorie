@@ -81,6 +81,12 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.calendar_today),
+            onPressed: _setToCurrentDay,
+          ),
+        ],
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
@@ -90,10 +96,6 @@ class _HomeState extends State<Home> {
             MaterialButton(
               child: Icon(Icons.arrow_back),
               onPressed: _decrementDay,
-            ),
-            MaterialButton(
-              child: Icon(Icons.calendar_today),
-              onPressed: _setToCurrentDay,
             ),
             Text(
               "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
