@@ -20,7 +20,12 @@ class LogProvider with ChangeNotifier {
 
   DateTime get selectedDay => _selectedDay;
 
-  set selectedDay(val) => _selectedDay = val;
+
+
+  set selectedDay(val){
+    _selectedDay = val;
+    notifyListeners();
+  }
 
   Log get log => _log;
 
@@ -30,18 +35,21 @@ class LogProvider with ChangeNotifier {
   void setToCurrentDay() {
     print('set to current');
     selectedDay = today;
+    print(selectedDay);
   }
 
   //increment day
   void incrementDay() {
     print('increment');
-    selectedDay++;
+    selectedDay = selectedDay.add(Duration(days: 1));
+    print(selectedDay);
   }
 
   //decrement day
   void decrementDay() {
     print('decrement');
-    selectedDay--;
+    selectedDay = selectedDay.subtract(Duration(days: 1));
+    print(selectedDay);
   }
 
   //delete from log based on ID

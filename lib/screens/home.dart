@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
 
   final String title;
   final user;
-  final DateTime today = new DateTime.now();
 
   LogItem convertToLogItem(item) {
     return new LogItem({
@@ -37,14 +36,11 @@ getUserName(name) {
 }
 
 class _HomeState extends State<Home> {
-  DateTime selectedDay = new DateTime.now();
-
   void _goToAddItemScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            AddToLogScreen(user: widget.user, selectedDay: selectedDay),
+        builder: (context) => AddToLogScreen(user: widget.user),
       ),
     );
   }
@@ -83,12 +79,14 @@ class _HomeState extends State<Home> {
                   );
                 },
               ),
-              Text(
-                "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
+              Consumer<LogProvider>(builder: (context, logProvider, __) {
+                return Text(
+                  "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                );
+              }),
               Consumer<LogProvider>(
                 builder: (context, logProvider, __) {
                   return MaterialButton(
@@ -105,7 +103,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               DrawerHeader(
                 child: Text(
-                  getUserName(widget.user.email),
+                  getUserName(widget.user),
                   style: TextStyle(
                     fontSize: 20.0,
                   ),
