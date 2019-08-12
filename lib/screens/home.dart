@@ -1,8 +1,8 @@
 import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/providers/log_provider.dart';
-import 'package:colorie/screens/add_to_log.dart';
 import 'package:colorie/widgets/card_list.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
+import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,16 +35,101 @@ getUserName(name) {
   return 'User';
 }
 
-class _HomeState extends State<Home> {
-  void _goToAddItemScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddToLogScreen(user: widget.user),
-      ),
-    );
-  }
+void _settingModalBottomSheet(context) {
+  showBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(FeatherIcons.camera),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(FeatherIcons.search),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Calories',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Grams',
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: FloatingActionButton.extended(
+                          backgroundColor: Colors.redAccent,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          label: Text("Cancel"),
+                        ),
+                      ),
+                      FloatingActionButton.extended(
+                        backgroundColor: Colors.blueAccent,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.add_circle),
+                        label: Text("Log Food"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      });
+}
 
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -58,7 +143,7 @@ class _HomeState extends State<Home> {
             Consumer<LogProvider>(
               builder: (context, logProvider, __) {
                 return IconButton(
-                  icon: Icon(Icons.calendar_today),
+                  icon: Icon(FeatherIcons.calendar),
                   onPressed: logProvider.setToCurrentDay,
                 );
               },
@@ -129,30 +214,34 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Consumer<LogProvider>(
-                builder: (context, logProvider, __) {
-                  return CirclePercentage(
-                    totalCalories: logProvider.log.getTotalCalories(),
-                  );
-                },
-              ),
-              Consumer<LogProvider>(
-                builder: (context, logProvider, __) {
-                  return CardList(
-                    list: logProvider.log,
-                    user: widget.user,
-                  );
-                },
-              ),
-            ],
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Consumer<LogProvider>(
+                  builder: (context, logProvider, __) {
+                    return CirclePercentage(
+                      totalCalories: logProvider.log.getTotalCalories(),
+                    );
+                  },
+                ),
+                Consumer<LogProvider>(
+                  builder: (context, logProvider, __) {
+                    return CardList(
+                      list: logProvider.log,
+                      user: widget.user,
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.blueAccent,
-          onPressed: _goToAddItemScreen,
+          onPressed: () {
+            _settingModalBottomSheet(context);
+          },
           icon: Icon(Icons.add_circle),
           label: Text("Log Food"),
         ),

@@ -1,6 +1,5 @@
 import 'package:colorie/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:colorie/screens/lading_page.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: Home(title: 'title', user: 'user'),
+      home: Scaffold(body: Home(title: 'title', user: 'user')),
       debugShowCheckedModeBanner: false,
     );
   }
