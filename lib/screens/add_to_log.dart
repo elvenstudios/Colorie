@@ -1,11 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class AddToLogScreen extends StatefulWidget {
   final user;
   final selectedDay;
 
-  AddToLogScreen({Key key, this.user, this.selectedDay,}) : super(key: key);
+  AddToLogScreen({
+    Key key,
+    this.user,
+    this.selectedDay,
+  }) : super(key: key);
 
   @override
   _AddToLogScreenState createState() => _AddToLogScreenState();
@@ -27,7 +31,8 @@ class _AddToLogScreenState extends State<AddToLogScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDay = "${widget.selectedDay.month}/${widget.selectedDay.day}/${widget.selectedDay.year}";
+    String formattedDay =
+        "${widget.selectedDay.month}/${widget.selectedDay.day}/${widget.selectedDay.year}";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

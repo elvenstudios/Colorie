@@ -1,27 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:colorie/models/log_item_model.dart';
-import 'package:colorie/models/log_model.dart';
+import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/add_to_log.dart';
 import 'package:colorie/screens/settings.dart';
 import 'package:colorie/widgets/card_list.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.user}) : super(key: key);
 
   final String title;
   final user;
-  final DateTime today = new DateTime.now();
 
   LogItem convertToLogItem(item) {
-    return new LogItem(
-        calories: item['calories'],
-        grams: item['grams'],
-        name: item['name'],
-        ref: item);
+    return new LogItem({
+      'calories': item['calories'],
+      'grams': item['grams'],
+      'name': item['name'],
+      'ref': item
+    });
   }
 
   @override
@@ -36,78 +37,67 @@ getUserName(name) {
 }
 
 class _HomeState extends State<Home> {
-  DateTime selectedDay = new DateTime.now();
-
-  void _addItemToLog() {
+  void _goToAddItemScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            AddToLogScreen(user: widget.user, selectedDay: selectedDay),
+        builder: (context) => AddToLogScreen(user: widget.user),
       ),
     );
   }
 
-  _incrementDay() {
-    if ((widget.today.day == selectedDay.day) &&
-        (widget.today.month == selectedDay.month) &&
-        (widget.today.year == selectedDay.year)) {
-      return false;
-    } else {
-      setState(() {
-        selectedDay = selectedDay.add(new Duration(days: 1));
-      });
-    }
-  }
-
-  _decrementDay() {
-    setState(() {
-      selectedDay = selectedDay.subtract(new Duration(days: 1));
-    });
-  }
-
-  _setToCurrentDay() {
-    setState(() {
-      selectedDay = widget.today;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    String formattedToday =
-        "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}";
-
     SystemChrome.setEnabledSystemUIOverlays([]);
-
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.calendar_today),
-            onPressed: _setToCurrentDay,
-          ),
-        ],
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        centerTitle: true,
-        titleSpacing: 0.0,
-        title: Row(
-          children: <Widget>[
-            MaterialButton(
-              child: Icon(Icons.arrow_back),
-              onPressed: _decrementDay,
-            ),
-            Text(
-              "${selectedDay.month}/${selectedDay.day}/${selectedDay.year}",
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            MaterialButton(
-              child: Icon(Icons.arrow_forward),
-              onPressed: _incrementDay,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => LogProvider()),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          actions: <Widget>[
+            Consumer<LogProvider>(
+              builder: (context, logProvider, __) {
+                return IconButton(
+                  icon: Icon(Icons.calendar_today),
+                  onPressed: logProvider.setToCurrentDay,
+                );
+              },
             ),
           ],
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          centerTitle: true,
+          titleSpacing: 0.0,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return MaterialButton(
+                    child: Icon(Icons.arrow_back),
+                    onPressed: logProvider.decrementDay,
+                  );
+                },
+              ),
+              Consumer<LogProvider>(builder: (context, logProvider, __) {
+                return Text(
+                  "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                );
+              }),
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return MaterialButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: logProvider.incrementDay,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
       drawer: Drawer(
@@ -162,51 +152,23 @@ class _HomeState extends State<Home> {
                 top: 10.0,
                 bottom: 60.0,
               ),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance
-                    .collection('logs')
-                    .document(widget.user.email)
-                    .collection('log')
-                    .where('date', isEqualTo: formattedToday)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError)
-                    return new Text('Error: ${snapshot.error}');
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return new Text('Loading...');
-                    default:
-                      Log formattedList = new Log();
-
-                      snapshot.data.documents.forEach((item) =>
-                          {formattedList.add(widget.convertToLogItem(item))});
-
-                      return SafeArea(
-                        child: Column(
-                          children: <Widget>[
-                            CirclePercentage(
-                              totalCalories: formattedList.getTotalCalories(),
-                            ),
-                            CardList(
-                              list: formattedList,
-                              user: widget.user,
-                            ),
-                          ],
-                        ),
-                      );
-                  }
+              Consumer<LogProvider>(
+                builder: (context, logProvider, __) {
+                  return CardList(
+                    list: logProvider.log,
+                    user: widget.user,
+                  );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.blueAccent,
-        onPressed: _addItemToLog,
-        icon: Icon(Icons.add_circle),
-        label: Text("Log Food"),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blueAccent,
+          onPressed: _goToAddItemScreen,
+          icon: Icon(Icons.add_circle),
+          label: Text("Log Food"),
+        ),
       ),
     );
   }
