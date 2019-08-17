@@ -1,6 +1,7 @@
 import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/add_to_log.dart';
+import 'package:colorie/screens/settings.dart';
 import 'package:colorie/widgets/card_list.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -98,46 +99,58 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              DrawerHeader(
+      ),
+      drawer: Drawer(
+          child: Column(children: <Widget>[
+            DrawerHeader(
                 child: Text(
-                  getUserName(widget.user),
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
+                  getUserName(widget.user.email),
                 ),
-              ),
-              ListTile(
-                title: Text("Settings"),
-                leading: Icon(Icons.settings),
-              ),
-              ListTile(
-                title: Text("Log Out"),
-                leading: Icon(Icons.account_circle),
-                enabled: false,
-                onTap: () {
-                  Navigator.pop(context);
-                  FirebaseAuth.instance.signOut();
-                },
-              ),
-              ListTile(
-                title: Text("Remove Ads"),
-                leading: Icon(Icons.play_arrow),
-              )
-            ],
-          ),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Consumer<LogProvider>(
-                builder: (context, logProvider, __) {
-                  return CirclePercentage(
-                    totalCalories: logProvider.log.getTotalCalories(),
-                  );
-                },
+            ),
+            Expanded(
+                child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                ListTile(
+                  title: Text('Remove Ads'),
+                  leading: Icon(Icons.play_arrow),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text('Settings'),
+                  leading: Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                  },
+                ),
+              ],
+            )),
+            Container(
+              color: Colors.black,
+              width: double.infinity,
+              height: 0.1,
+            ),
+            Container(
+                padding: EdgeInsets.all(10),
+                height: 100,
+                child:                ListTile(
+                    title: Text('Logout'),
+                    leading: Icon(Icons.account_circle),
+                    onTap: () {
+                      Navigator.pop(context);
+                      FirebaseAuth.instance.signOut();
+                    })),
+          ])),
+      body: Center(
+        child: ListView(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(
+                top: 10.0,
+                bottom: 60.0,
               ),
               Consumer<LogProvider>(
                 builder: (context, logProvider, __) {
