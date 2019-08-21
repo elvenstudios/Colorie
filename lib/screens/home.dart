@@ -184,36 +184,50 @@ class _HomeState extends State<Home> {
           ),
         ),
         drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
+            child: Column(children: <Widget>[
               DrawerHeader(
                 child: Text(
-                  getUserName(widget.user),
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
+
+                  getUserName(widget.user.email),
                 ),
               ),
-              ListTile(
-                title: Text("Settings"),
-                leading: Icon(Icons.settings),
+              Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: <Widget>[
+                      ListTile(
+                        title: Text('Remove Ads'),
+                        leading: Icon(Icons.play_arrow),
+                        onTap: () {},
+                      ),
+                      ListTile(
+                        title: Text('Settings'),
+                        leading: Icon(Icons.settings),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Settings()),
+                          );
+                        },
+                      ),
+                    ],
+                  )),
+              Container(
+                color: Colors.black,
+                width: double.infinity,
+                height: 0.1,
               ),
-              ListTile(
-                title: Text("Log Out"),
-                leading: Icon(Icons.account_circle),
-                enabled: false,
-                onTap: () {
-                  Navigator.pop(context);
-                  FirebaseAuth.instance.signOut();
-                },
-              ),
-              ListTile(
-                title: Text("Remove Ads"),
-                leading: Icon(Icons.play_arrow),
-              )
-            ],
-          ),
-        ),
+              Container(
+                  padding: EdgeInsets.all(10),
+                  height: 100,
+                  child:                ListTile(
+                      title: Text('Logout'),
+                      leading: Icon(Icons.account_circle),
+                      onTap: () {
+                        Navigator.pop(context);
+                        FirebaseAuth.instance.signOut();
+                      })),
+            ])),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
