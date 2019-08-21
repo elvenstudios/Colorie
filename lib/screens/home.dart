@@ -35,7 +35,7 @@ getUserName(name) {
   return 'User';
 }
 
-void _settingModalBottomSheet(context) {
+void _showAddItemBottomSheet(context) {
   showBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -240,7 +240,7 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.blueAccent,
           onPressed: () {
-            _settingModalBottomSheet(context);
+            _showAddItemBottomSheet(context);
           },
           icon: Icon(Icons.add_circle),
           label: Text("Log Food"),

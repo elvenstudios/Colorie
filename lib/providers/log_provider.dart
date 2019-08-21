@@ -6,10 +6,14 @@ class LogProvider with ChangeNotifier {
   final DatabaseHelper db = DatabaseHelper();
   static Log _log = Log();
 
-  void get getLogLocalDB async {
+  void getLogLocalDB() async {
     _log = await db.getItems();
     print("Local DB loaded");
     print(_log.length());
+  }
+
+  initState() {
+    getLogLocalDB();
   }
 
   static final DateTime _today = DateTime.now();
