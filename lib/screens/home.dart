@@ -185,61 +185,57 @@ class _HomeState extends State<Home> {
         ),
         drawer: Drawer(
             child: Column(children: <Widget>[
-              DrawerHeader(
-                child: Text(
-
-                  getUserName(widget.user.email),
-                ),
+          DrawerHeader(child: Consumer<LogProvider>(
+            builder: (context, logProvider, __) {
+              return Text('USER');
+            },
+          )),
+          Expanded(
+              child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              ListTile(
+                title: Text('Remove Ads'),
+                leading: Icon(Icons.play_arrow),
+                onTap: () {},
               ),
-              Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: <Widget>[
-                      ListTile(
-                        title: Text('Remove Ads'),
-                        leading: Icon(Icons.play_arrow),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        title: Text('Settings'),
-                        leading: Icon(Icons.settings),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Settings()),
-                          );
-                        },
-                      ),
-                    ],
-                  )),
-              Container(
-                color: Colors.black,
-                width: double.infinity,
-                height: 0.1,
+              ListTile(
+                title: Text('Settings'),
+                leading: Icon(Icons.settings),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  );
+                },
               ),
+            ],
+          )),
+          Container(
+            color: Colors.black,
+            width: double.infinity,
+            height: 0.1,
+          ),
+          Container(
+              padding: EdgeInsets.all(10),
+              height: 100,
+              child: ListTile(
+                  title: Text('Logout'),
+                  leading: Icon(Icons.account_circle),
+                  onTap: () {
+                    Navigator.pop(context);
+                    FirebaseAuth.instance.signOut();
+                  })),
+        ])),
+        body: Center(
+          child: ListView(
+            children: <Widget>[
               Container(
-                  padding: EdgeInsets.all(10),
-                  height: 100,
-                  child:                ListTile(
-                      title: Text('Logout'),
-                      leading: Icon(Icons.account_circle),
-                      onTap: () {
-                        Navigator.pop(context);
-                        FirebaseAuth.instance.signOut();
-                      })),
-            ])),
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                Consumer<LogProvider>(
-                  builder: (context, logProvider, __) {
-                    return CirclePercentage(
-                      totalCalories: logProvider.log.getTotalCalories(),
-                    );
-                  },
+                padding: const EdgeInsets.only(
+                  top: 10.0,
+                  bottom: 60.0,
                 ),
-                Consumer<LogProvider>(
+                child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
                     return CardList(
                       list: logProvider.log,
@@ -247,15 +243,13 @@ class _HomeState extends State<Home> {
                     );
                   },
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.blueAccent,
-          onPressed: () {
-            _showAddItemBottomSheet(context);
-          },
+          //onPressed: _goToAddItemScreen,
           icon: Icon(Icons.add_circle),
           label: Text("Log Food"),
         ),
