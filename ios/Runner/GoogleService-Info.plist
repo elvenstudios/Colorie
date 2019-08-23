@@ -28,9 +28,5 @@
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
-	<key>GOOGLE_APP_ID</key>
-	<string>1:581092006123:ios:5598fef648350458</string>
-	<key>DATABASE_URL</key>
-	<string>https://testing-ba2c5.firebaseio.com</string>
 </dict>
 </plist>

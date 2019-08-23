@@ -19,9 +19,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^0.4.0  # add dependency for Firebase Core
-  cloud_firestore: ^0.12.5 # add this line
-  firebase_auth: ^0.11.1
   feather_icons_flutter: ^4.7.4
   sqflite: ^1.1.6
   path_provider: any

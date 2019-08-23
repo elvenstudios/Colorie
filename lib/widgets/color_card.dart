@@ -22,9 +22,6 @@ class ColorCard extends StatefulWidget {
   @override
   _ColorCardState createState() => _ColorCardState();
 
-  void deleteItem(item) {
-    //TODO: make delete from firebase
-  }
 }
 
 class _ColorCardState extends State<ColorCard> {
@@ -157,7 +154,7 @@ class _ColorCardState extends State<ColorCard> {
                     icon: Icon(FeatherIcons.xCircle, color: Colors.pinkAccent,),
                     tooltip: 'Remove Item From Log',
                     onPressed: () {
-                      widget.deleteItem(item);
+                      //Delete Item;
                     },
                   ),
                 );
