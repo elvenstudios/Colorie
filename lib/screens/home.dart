@@ -4,7 +4,6 @@ import 'package:colorie/screens/settings.dart';
 import 'package:colorie/widgets/card_list.dart';
 import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -225,7 +224,6 @@ class _HomeState extends State<Home> {
                   leading: Icon(Icons.account_circle),
                   onTap: () {
                     Navigator.pop(context);
-                    FirebaseAuth.instance.signOut();
                   })),
         ])),
         body: Center(

@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'lading_page.dart';
@@ -204,7 +204,6 @@ class _SettingsState extends State<Settings> {
                   RaisedButton(
                     onPressed:() {
                       Navigator.pop(context);
-                      FirebaseAuth.instance.signOut();
                     },
                     color: Colors.blueAccent,
                     child: const Text('Log Out',
