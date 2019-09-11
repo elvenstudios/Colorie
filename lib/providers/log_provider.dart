@@ -64,8 +64,8 @@ class LogProvider with ChangeNotifier {
   }
 
   //add to log
-  void addToLog(item) {
+  Future<void> addToLog(item) async{
     print('addToLog');
-    db.saveLog(item);
+   await db.saveLog(item);
   }
 }

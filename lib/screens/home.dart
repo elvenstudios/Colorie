@@ -2,7 +2,6 @@ import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/settings.dart';
 import 'package:colorie/widgets/card_list.dart';
-import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -36,95 +35,117 @@ getUserName(name) {
 }
 
 void _showAddItemBottomSheet(context) {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController caloriesController = TextEditingController();
+  TextEditingController gramsController = TextEditingController();
+
   showBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: <Widget>[
-              Column(
+        return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(builder: (_) => LogProvider()),
+            ],
+          child: Consumer<LogProvider>(builder: (context, logProvider, __) {
+            return Container(
+              padding: EdgeInsets.all(16.0),
+              child: ListView(
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  Column(
                     children: <Widget>[
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(FeatherIcons.camera),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(FeatherIcons.search),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Name',
-                            border: InputBorder.none,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(FeatherIcons.camera),
                           ),
-                        ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(FeatherIcons.search),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Calories',
-                            border: InputBorder.none,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Grams',
-                            border: InputBorder.none,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: caloriesController,
+                              decoration: InputDecoration(
+                                labelText: 'Calories',
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: FloatingActionButton.extended(
-                          backgroundColor: Colors.redAccent,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          label: Text("Cancel"),
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: gramsController,
+                              decoration: InputDecoration(
+                                labelText: 'Grams',
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      FloatingActionButton.extended(
-                        backgroundColor: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.add_circle),
-                        label: Text("Log Food"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: FloatingActionButton.extended(
+                              backgroundColor: Colors.redAccent,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              label: Text("Cancel"),
+                            ),
+                          ),
+                          FloatingActionButton.extended(
+                            backgroundColor: Colors.blueAccent,
+                            onPressed: () {
+                              var item = new LogItem({
+                                'foodname': nameController.value.toString(),
+                                'calories': caloriesController.value.toString(),
+                                'grams': gramsController.value.toString(),
+                                'create_dt_tm': DateTime.now().toString()
+                              });
+                              logProvider.addToLog(item);
+                              Navigator.pop(context);
+
+                            },
+                            icon: Icon(Icons.add_circle),
+                            label: Text("Log Food"),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-            ],
-          ),
+            );
+          }),
         );
       });
 }

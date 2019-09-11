@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'lading_page.dart';
+import 'home.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LandingPage()),
+                              builder: (context) => Home()),
                         );
                       },
                     ),
@@ -70,7 +70,7 @@ class _SettingsState extends State<Settings> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LandingPage()),
+                              builder: (context) => Home()),
                         );
                       },
                     ),

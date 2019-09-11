@@ -39,6 +39,7 @@ class DatabaseHelper {
   Future<int> saveLog(LogItem item) async {
     var dbClient = await db;
     int res = await dbClient.insert("Log", item.toMap());
+    print(getItems());
     print(res);
     return res;
   }
