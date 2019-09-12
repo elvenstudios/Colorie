@@ -21,7 +21,6 @@ class ColorCard extends StatefulWidget {
 
   @override
   _ColorCardState createState() => _ColorCardState();
-
 }
 
 class _ColorCardState extends State<ColorCard> {
@@ -151,7 +150,10 @@ class _ColorCardState extends State<ColorCard> {
                   title: Text(item.name),
                   subtitle: Text("${item.calories.toString()} calories"),
                   trailing: IconButton(
-                    icon: Icon(FeatherIcons.xCircle, color: Colors.pinkAccent,),
+                    icon: Icon(
+                      FeatherIcons.xCircle,
+                      color: Colors.pinkAccent,
+                    ),
                     tooltip: 'Remove Item From Log',
                     onPressed: () {
                       //Delete Item;

@@ -56,12 +56,8 @@ class DatabaseHelper {
     print(list);
     List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
-      var item = new LogItem(
-        list[i]["foodName"],
-        list[i]["calories"],
-        list[i]["grams"],
-        list[i]["createDateTime"]
-      );
+      var item = new LogItem(list[i]["foodName"], list[i]["calories"],
+          list[i]["grams"], list[i]["createDateTime"]);
       item.setDatabaseFieldID(list[i]["id"]);
       items.add(item);
     }

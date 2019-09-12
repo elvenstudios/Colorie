@@ -3,31 +3,31 @@ import 'package:colorie/widgets/color_card.dart';
 import 'package:colorie/models/log_model.dart';
 
 class CardList extends StatefulWidget {
-  CardList({Key key, this.list, this.user,}) : super(key: key);
+  CardList({
+    Key key,
+    this.list,
+    this.user,
+  }) : super(key: key);
   final Log list;
   final user;
 
   String getGreenPercentage() {
-    if((list.getGreenPercentage() * 100).isNaN)
-      return '0%';
+    if ((list.getGreenPercentage() * 100).isNaN) return '0%';
     return "${(list.getGreenPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getYellowPercentage() {
-    if((list.getYellowPercentage() * 100).isNaN)
-      return '0%';
+    if ((list.getYellowPercentage() * 100).isNaN) return '0%';
     return "${(list.getYellowPercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getOrangePercentage() {
-    if((list.getOrangePercentage() * 100).isNaN)
-      return '0%';
+    if ((list.getOrangePercentage() * 100).isNaN) return '0%';
     return "${(list.getOrangePercentage() * 100).toStringAsFixed(1)}%";
   }
 
   String getRedPercentage() {
-    if((list.getRedPercentage() * 100).isNaN)
-      return '0%';
+    if ((list.getRedPercentage() * 100).isNaN) return '0%';
     return "${(list.getRedPercentage() * 100).toStringAsFixed(1)}%";
   }
 

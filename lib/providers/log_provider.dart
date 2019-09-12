@@ -8,14 +8,16 @@ class LogProvider with ChangeNotifier {
 
   void getLogLocalDB() async {
     _log = await db.getItems();
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    print(
+        ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     print(_log.length());
     print(_log);
   }
 
   initState() {
     getLogLocalDB();
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB initState loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    print(
+        ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB initState loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   }
 
   static final DateTime _today = DateTime.now();
@@ -26,9 +28,7 @@ class LogProvider with ChangeNotifier {
 
   DateTime get selectedDay => _selectedDay;
 
-
-
-  set selectedDay(val){
+  set selectedDay(val) {
     _selectedDay = val;
     notifyListeners();
   }
@@ -67,12 +67,12 @@ class LogProvider with ChangeNotifier {
   }
 
   //add to log
-  Future<void> addToLog(item) async{
+  Future<void> addToLog(item) async {
     print('LogProvider addToLog');
     print(item.foodName);
     print(item.calories);
     print(item.grams);
-   await db.saveLog(item);
+    await db.saveLog(item);
     print('LogProvider addToLog Saved');
   }
 }

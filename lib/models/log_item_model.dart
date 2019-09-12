@@ -28,12 +28,11 @@ class LogItem {
     this._createDateTime = obj["createDateTime"];
   }
 
-
-  Map<String,dynamic> get map {
+  Map<String, dynamic> get map {
     return {
       "foodName": _foodName,
       "calories": _calories,
-      "grams":_grams,
+      "grams": _grams,
       "createDateTime": createDateTime,
     };
   }

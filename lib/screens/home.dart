@@ -250,11 +250,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.only(
-                  top: 10.0,
-                  bottom: 10.0,
-                  left: 65.0,
-                  right: 65.0
-                ),
+                    top: 10.0, bottom: 10.0, left: 65.0, right: 65.0),
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
                     return CirclePercentage(

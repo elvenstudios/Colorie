@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import './circle_painter.dart';
 
 class CirclePercentage extends StatefulWidget {
-
   final num totalCalories;
 
   CirclePercentage({Key key, this.totalCalories}) : super(key: key);
@@ -20,11 +19,10 @@ class _CirclePercentageState extends State<CirclePercentage> {
         shape: BoxShape.circle,
         boxShadow: [
           new BoxShadow(
-            color: Colors.grey,
-            offset: new Offset(5.0, 5.0),
-            spreadRadius: 1.0,
-            blurRadius: 20.0
-          )
+              color: Colors.grey,
+              offset: new Offset(5.0, 5.0),
+              spreadRadius: 1.0,
+              blurRadius: 20.0)
         ],
       ),
       margin: EdgeInsets.only(top: 30.0, bottom: 16.0, right: 16.0, left: 16.0),
@@ -37,8 +35,13 @@ class _CirclePercentageState extends State<CirclePercentage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("${widget.totalCalories}", style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
-              Text("Total Calories", style: TextStyle(color: Colors.grey, fontSize: 16.0),)
+              Text("${widget.totalCalories}",
+                  style:
+                      TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
+              Text(
+                "Total Calories",
+                style: TextStyle(color: Colors.grey, fontSize: 16.0),
+              )
             ],
           ),
         ),
