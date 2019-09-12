@@ -42,7 +42,7 @@ class DatabaseHelper {
     print(item.calories);
     print(item.grams);
     var dbClient = await db;
-    int res = await dbClient.insert("Log", item.toMap());
+    int res = await dbClient.insert("Log", item.map);
     print('Local Storage Save Log Saved');
     print(getItems());
     print(res);
@@ -62,7 +62,7 @@ class DatabaseHelper {
         list[i]["grams"],
         list[i]["createDateTime"]
       );
-      item.setUserId(list[i]["id"]);
+      item.setDatabaseFieldID(list[i]["id"]);
       items.add(item);
     }
     Log log = Log(log: items);

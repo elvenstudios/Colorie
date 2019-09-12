@@ -11,13 +11,6 @@ class LogItem {
 
   LogItem(this._foodName, this._calories, this._grams, this._createDateTime);
 
-  LogItem.map(dynamic obj) {
-    this._foodName = obj["foodName"];
-    this._calories = obj["calories"];
-    this._grams = obj["grams"];
-    this._createDateTime = obj["createDateTime"];
-  }
-
   int get id => _id;
 
   String get foodName => _foodName;
@@ -28,16 +21,27 @@ class LogItem {
 
   String get createDateTime => _createDateTime;
 
-  Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map["foodName"] = _foodName;
-    map["calories"] = _calories;
-    map["grams"] = _grams;
-    map["createDateTime"] = createDateTime;
-    return map;
+  LogItem.map(dynamic obj) {
+    this._foodName = obj["foodName"];
+    this._calories = obj["calories"];
+    this._grams = obj["grams"];
+    this._createDateTime = obj["createDateTime"];
   }
 
-  void setUserId(int id) {
+
+  Map<String,dynamic> get map {
+    return {
+      "foodName": _foodName,
+      "calories": _calories,
+      "grams":_grams,
+      "createDateTime": createDateTime,
+    };
+  }
+
+  /*
+   * Needed to set database ID to log model to allow item to be deleted from DB
+   */
+  void setDatabaseFieldID(int id) {
     this._id = id;
   }
 

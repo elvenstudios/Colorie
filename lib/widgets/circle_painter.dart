@@ -10,7 +10,7 @@ class CirclePainter extends CustomPainter {
     paint.strokeWidth = 5;
     paint.style = PaintingStyle.stroke;
 
-    Log logfile; //get logfile from store
+    //Log logfile; //get logfile from store
 
     var rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
 
