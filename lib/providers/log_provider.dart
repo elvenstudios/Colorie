@@ -10,6 +10,7 @@ class LogProvider with ChangeNotifier {
     _log = await db.getItems();
     print("Local DB loaded");
     print(_log.length());
+    print(_log);
   }
 
   initState() {
@@ -61,11 +62,16 @@ class LogProvider with ChangeNotifier {
     print('removeFromLog');
     var db = new DatabaseHelper();
     db.deleteItem(item);
+    print('Deleted');
   }
 
   //add to log
   Future<void> addToLog(item) async{
-    print('addToLog');
+    print('LogProvider addToLog');
+    print(item.foodName);
+    print(item.calories);
+    print(item.grams);
    await db.saveLog(item);
+    print('LogProvider addToLog Saved');
   }
 }

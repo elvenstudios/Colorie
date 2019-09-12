@@ -14,24 +14,8 @@ class Home extends StatefulWidget {
   final String title;
   final user;
 
-  LogItem convertToLogItem(item) {
-    return new LogItem({
-      'calories': item['calories'],
-      'grams': item['grams'],
-      'name': item['name'],
-      'ref': item
-    });
-  }
-
   @override
   _HomeState createState() => _HomeState();
-}
-
-getUserName(name) {
-  if (name != null) {
-    return name;
-  }
-  return 'User';
 }
 
 void _showAddItemBottomSheet(context) {
@@ -39,13 +23,17 @@ void _showAddItemBottomSheet(context) {
   TextEditingController caloriesController = TextEditingController();
   TextEditingController gramsController = TextEditingController();
 
+  nameController.text = 'Lettuce';
+  caloriesController.text = '20';
+  gramsController.text = '600';
+
   showBottomSheet(
       context: context,
       builder: (BuildContext bc) {
         return MultiProvider(
-            providers: [
-              ChangeNotifierProvider(builder: (_) => LogProvider()),
-            ],
+          providers: [
+            ChangeNotifierProvider(builder: (_) => LogProvider()),
+          ],
           child: Consumer<LogProvider>(builder: (context, logProvider, __) {
             return Container(
               padding: EdgeInsets.all(16.0),
@@ -125,15 +113,22 @@ void _showAddItemBottomSheet(context) {
                           FloatingActionButton.extended(
                             backgroundColor: Colors.blueAccent,
                             onPressed: () {
-                              var item = new LogItem({
-                                'foodname': nameController.value.toString(),
-                                'calories': caloriesController.value.toString(),
-                                'grams': gramsController.value.toString(),
-                                'create_dt_tm': DateTime.now().toString()
-                              });
+                              print('Button Press');
+                              print(nameController.text.toString());
+                              print(caloriesController.text.toString());
+                              print(gramsController.text.toString());
+                              LogItem item = LogItem(
+                                  nameController.text.toString(),
+                                  int.parse(caloriesController.text),
+                                  int.parse(gramsController.text),
+                                  DateTime.now().toString());
+
+                              print('FOOD NAME ${item.foodName}');
+                              print('CALORIES ${item.calories}');
+                              print('GRAMS ${item.grams}');
+
                               logProvider.addToLog(item);
                               Navigator.pop(context);
-
                             },
                             icon: Icon(Icons.add_circle),
                             label: Text("Log Food"),

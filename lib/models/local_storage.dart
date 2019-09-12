@@ -33,12 +33,17 @@ class DatabaseHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,create_dt_tm TEXT)");
+        "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,createDateTime TEXT)");
   }
 
   Future<int> saveLog(LogItem item) async {
+    print('Local Storage Save Log');
+    print(item.foodName);
+    print(item.calories);
+    print(item.grams);
     var dbClient = await db;
     int res = await dbClient.insert("Log", item.toMap());
+    print('Local Storage Save Log Saved');
     print(getItems());
     print(res);
     return res;
@@ -47,20 +52,20 @@ class DatabaseHelper {
   Future<Log> getItems() async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Log');
+    print('Local Storage Get Items');
     print(list);
-    List items = [];
+    List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
-      var item = new LogItem({
-        'foodname': list[i]["foodName"],
-        'calories': list[i]["calories"],
-        'grams': list[i]["grams"],
-        'create_dt_tm': list[i]["create_dt_tm"]
-      });
+      var item = new LogItem(
+        list[i]["foodName"],
+        list[i]["calories"],
+        list[i]["grams"],
+        list[i]["createDateTime"]
+      );
       item.setUserId(list[i]["id"]);
       items.add(item);
     }
-    Log log = Log();
-    log.setLog(items);
+    Log log = Log(log: items);
     return log;
   }
 

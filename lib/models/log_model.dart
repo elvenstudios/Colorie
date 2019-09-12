@@ -7,6 +7,8 @@ import './log_item_model.dart';
 class Log {
   List<LogItem> _log = [];
 
+  Log({List<LogItem> log});
+
   add(item) {
     _log.add(item);
   }
