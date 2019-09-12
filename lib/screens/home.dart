@@ -118,10 +118,11 @@ void _showAddItemBottomSheet(context) {
                               print(nameController.text.toString());
                               print(caloriesController.text.toString());
                               print(gramsController.text.toString());
+
                               LogItem item = LogItem(
                                   nameController.text.toString(),
-                                  int.parse(caloriesController.text),
-                                  int.parse(gramsController.text),
+                                  int.tryParse(caloriesController.text) ?? 0,
+                                  int.tryParse(gramsController.text) ?? 0,
                                   DateTime.now().toString());
 
                               print('FOOD NAME ${item.foodName}');
