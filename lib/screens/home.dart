@@ -23,6 +23,7 @@ void _showAddItemBottomSheet(context) {
   TextEditingController caloriesController = TextEditingController();
   TextEditingController gramsController = TextEditingController();
 
+  //DEFAULT VALUES FOR TESTING
   nameController.text = 'Lettuce';
   caloriesController.text = '20';
   gramsController.text = '600';
