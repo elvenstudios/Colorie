@@ -12,7 +12,6 @@ class _SettingsState extends State<Settings> {
   bool pushNotifValue = false;
   bool darkThemeValue = false;
 
-  
   void _onChangedPushNotif(bool value) => setState(() => pushNotifValue = value);
   void _onChangeddarkTheme(bool value) => setState(() => darkThemeValue = value);
 

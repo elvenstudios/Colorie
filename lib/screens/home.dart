@@ -114,7 +114,7 @@ void _showAddItemBottomSheet(context) {
                           ),
                           FloatingActionButton.extended(
                             backgroundColor: Colors.blueAccent,
-                            onPressed: () {
+                            onPressed: () async {
                               print('Button Press');
                               print(nameController.text.toString());
                               print(caloriesController.text.toString());
@@ -130,7 +130,7 @@ void _showAddItemBottomSheet(context) {
                               print('CALORIES ${item.calories}');
                               print('GRAMS ${item.grams}');
 
-                              logProvider.addToLog(item);
+                              await logProvider.addToLog(item);
                               Navigator.pop(context);
                             },
                             icon: Icon(Icons.add_circle),

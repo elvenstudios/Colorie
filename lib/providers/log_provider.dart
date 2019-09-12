@@ -8,13 +8,14 @@ class LogProvider with ChangeNotifier {
 
   void getLogLocalDB() async {
     _log = await db.getItems();
-    print("Local DB loaded");
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     print(_log.length());
     print(_log);
   }
 
   initState() {
     getLogLocalDB();
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Local DB initState loaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   }
 
   static final DateTime _today = DateTime.now();
