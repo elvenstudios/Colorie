@@ -24,11 +24,29 @@ class LogProvider with ChangeNotifier {
 
   DateTime get selectedDay => _selectedDay;
 
-
-
-  set selectedDay(val){
+  set selectedDay(val) {
+    print('SELECTDAY SET $val');
     _selectedDay = val;
     notifyListeners();
+  }
+
+  Future<Null> setDatePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2016),
+      lastDate: DateTime(2030),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child,
+        );
+      },
+    );
+    if (picked != null && picked != _selectedDay) {
+      _selectedDay = picked;
+      notifyListeners();
+    }
   }
 
   Log get log => _log;

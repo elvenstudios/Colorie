@@ -139,26 +139,12 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
-            Consumer<LogProvider>(
-              builder: (context, logProvider, __) {
-                return IconButton(
-                    icon: Icon(FeatherIcons.calendar),
-                    onPressed: () => {
-                          logProvider.selectedDay = showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2016),
-                            lastDate: DateTime(2030),
-                            builder: (BuildContext context, Widget child) {
-                              return Theme(
-                                data: ThemeData.light(),
-                                child: child,
-                              );
-                            },
-                          )
-                        });
-              },
-            ),
+            Consumer<LogProvider>(builder: (context, logProvider, __) {
+              return IconButton(
+                icon: Icon(FeatherIcons.calendar),
+                onPressed: () => logProvider.setDatePicker(context),
+              );
+            })
           ],
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
