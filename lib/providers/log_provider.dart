@@ -1,6 +1,8 @@
 import 'package:colorie/models/local_storage.dart';
+import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LogProvider with ChangeNotifier {
   //LOCAL DB INIT
@@ -25,11 +27,24 @@ class LogProvider with ChangeNotifier {
 
   set log(val) => _log = val;
 
+  Log currentDayLog() {
+    getLogLocalDB();
+    print('currentDayLog');
+    Log log = Log();
+    log.setLog(_log
+        .getLog()
+        .where((e) =>  DateFormat('yyyy-MM-dd').format(DateTime.parse(e.createDateTime)) == DateFormat('yyyy-MM-dd').format(_selectedDay))
+        .toList());
+    print(log);
+    return log;
+  }
+
   //delete from log based on ID
   void removeFromLog(item) {
     print('removeFromLog');
     var db = new DatabaseHelper();
     db.deleteItem(item);
+    notifyListeners();
     print('Deleted');
   }
 
@@ -48,6 +63,7 @@ class LogProvider with ChangeNotifier {
   Future<void> setLog(newLog) async {
     print('LogProvider setLog');
     _log = newLog;
+    notifyListeners();
     print('LogProvider setLog Saved');
   }
 

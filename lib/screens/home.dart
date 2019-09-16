@@ -185,7 +185,9 @@ class _HomeState extends State<Home> {
               ),
               Consumer<LogProvider>(builder: (context, logProvider, __) {
                 return Text(
-                  "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
+                  "${logProvider.selectedDay.month}"
+                  "/${logProvider.selectedDay.day}"
+                  "/${logProvider.selectedDay.year}",
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -254,7 +256,8 @@ class _HomeState extends State<Home> {
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
                     return CirclePercentage(
-                      totalCalories: logProvider.log.getTotalCalories(),
+                      totalCalories:
+                          logProvider.currentDayLog().getTotalCalories(),
                     );
                   },
                 ),
@@ -267,7 +270,7 @@ class _HomeState extends State<Home> {
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
                     return CardList(
-                      list: logProvider.log,
+                      list: logProvider.currentDayLog(),
                       user: widget.user,
                     );
                   },

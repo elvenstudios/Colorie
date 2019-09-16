@@ -11,26 +11,6 @@ class CardList extends StatefulWidget {
   final Log list;
   final user;
 
-  String getGreenPercentage() {
-    if ((list.getGreenPercentage() * 100).isNaN) return '0%';
-    return "${(list.getGreenPercentage() * 100).toStringAsFixed(1)}%";
-  }
-
-  String getYellowPercentage() {
-    if ((list.getYellowPercentage() * 100).isNaN) return '0%';
-    return "${(list.getYellowPercentage() * 100).toStringAsFixed(1)}%";
-  }
-
-  String getOrangePercentage() {
-    if ((list.getOrangePercentage() * 100).isNaN) return '0%';
-    return "${(list.getOrangePercentage() * 100).toStringAsFixed(1)}%";
-  }
-
-  String getRedPercentage() {
-    if ((list.getRedPercentage() * 100).isNaN) return '0%';
-    return "${(list.getRedPercentage() * 100).toStringAsFixed(1)}%";
-  }
-
   @override
   _CardListState createState() => _CardListState();
 }
@@ -44,7 +24,7 @@ class _CardListState extends State<CardList> {
           title: 'Lots',
           borderColor: Colors.greenAccent,
           subtext: 'Goal: 60% or more',
-          percentageTitle: widget.getGreenPercentage(),
+          percentageTitle: widget.list.getGreenPercentage(),
           logItems: widget.list.getGreenLogItems(),
           user: widget.user,
         ),
@@ -52,7 +32,7 @@ class _CardListState extends State<CardList> {
           title: 'Plenty',
           borderColor: Colors.amberAccent,
           subtext: 'Goal: 25% or more',
-          percentageTitle: widget.getYellowPercentage(),
+          percentageTitle: widget.list.getYellowPercentage(),
           logItems: widget.list.getYellowLogItems(),
           user: widget.user,
         ),
@@ -60,7 +40,7 @@ class _CardListState extends State<CardList> {
           title: 'Some',
           borderColor: Colors.orangeAccent,
           subtext: 'Goal: 10% or less',
-          percentageTitle: widget.getOrangePercentage(),
+          percentageTitle: widget.list.getOrangePercentage(),
           logItems: widget.list.getOrangeLogItems(),
           user: widget.user,
         ),
@@ -68,7 +48,7 @@ class _CardListState extends State<CardList> {
           title: 'Few',
           borderColor: Colors.pinkAccent,
           subtext: 'Goal: 5% or less',
-          percentageTitle: widget.getRedPercentage(),
+          percentageTitle: widget.list.getRedPercentage(),
           logItems: widget.list.getRedLogItems(),
           user: widget.user,
         ),

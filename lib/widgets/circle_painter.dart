@@ -20,6 +20,7 @@ class CirclePainter extends CustomPainter {
     //double greenCurve =  logfile.getGreenPercentage()/100*360;
     double greenAngle = pi * 40 / 180; //hardcoded should be line below
     // double greenAngle = pi * greenCurve / 180
+
     canvas.drawArc(rect, startAngle, greenAngle, false, paint);
 
     paint.color = Colors.yellowAccent;

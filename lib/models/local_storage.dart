@@ -50,25 +50,31 @@ class DatabaseHelper {
   }
 
   Future<Log> getItems() async {
+    print('>>>>>GETTING ITEMS<<<<<<<<');
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Log');
     print('Local Storage Get Items');
     print(list);
     List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
+      print(i);
+      print(list[i]);
       var item = new LogItem(list[i]["foodName"], list[i]["calories"],
           list[i]["grams"], list[i]["createDateTime"]);
       item.setDatabaseFieldID(list[i]["id"]);
       items.add(item);
     }
-    Log log = Log(log: items);
+    Log log = Log();
+    log.setLog(items);
+    print('DB ITEMS');
+    print(log.getLog());
     return log;
   }
 
-  Future<int> deleteItem(LogItem item) async {
+  Future<int> deleteItem(id) async {
     var dbClient = await db;
     int res =
-        await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [item.id]);
+        await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [id]);
     return res;
   }
 
