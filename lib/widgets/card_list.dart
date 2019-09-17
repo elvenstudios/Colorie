@@ -6,10 +6,8 @@ class CardList extends StatefulWidget {
   CardList({
     Key key,
     this.list,
-    this.user,
   }) : super(key: key);
   final Log list;
-  final user;
 
   @override
   _CardListState createState() => _CardListState();
@@ -26,7 +24,6 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 60% or more',
           percentageTitle: widget.list.getGreenPercentage(),
           logItems: widget.list.getGreenLogItems(),
-          user: widget.user,
         ),
         ColorCard(
           title: 'Plenty',
@@ -34,7 +31,6 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 25% or more',
           percentageTitle: widget.list.getYellowPercentage(),
           logItems: widget.list.getYellowLogItems(),
-          user: widget.user,
         ),
         ColorCard(
           title: 'Some',
@@ -42,7 +38,6 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 10% or less',
           percentageTitle: widget.list.getOrangePercentage(),
           logItems: widget.list.getOrangeLogItems(),
-          user: widget.user,
         ),
         ColorCard(
           title: 'Few',
@@ -50,7 +45,6 @@ class _CardListState extends State<CardList> {
           subtext: 'Goal: 5% or less',
           percentageTitle: widget.list.getRedPercentage(),
           logItems: widget.list.getRedLogItems(),
-          user: widget.user,
         ),
       ],
     );

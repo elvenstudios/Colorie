@@ -4,7 +4,9 @@ import './circle_painter.dart';
 class CirclePercentage extends StatefulWidget {
   final num totalCalories;
 
-  CirclePercentage({Key key, this.totalCalories}) : super(key: key);
+  var context;
+
+  CirclePercentage({Key key, this.totalCalories,this.context}) : super(key: key);
 
   @override
   _CirclePercentageState createState() => _CirclePercentageState();
@@ -29,7 +31,7 @@ class _CirclePercentageState extends State<CirclePercentage> {
       width: 225.0,
       height: 225.0,
       child: CustomPaint(
-        painter: CirclePainter(),
+        painter: CirclePainter(context),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

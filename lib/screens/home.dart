@@ -7,13 +7,13 @@ import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  Home({Key key, this.title, this.user}) : super(key: key);
+  Home({Key key, this.title}) : super(key: key);
 
   final String title;
-  final user;
 
   @override
   _HomeState createState() => _HomeState();
@@ -115,22 +115,16 @@ void _showAddItemBottomSheet(context) {
                           FloatingActionButton.extended(
                             backgroundColor: Colors.blueAccent,
                             onPressed: () async {
-                              print('Button Press');
-                              print(nameController.text.toString());
-                              print(caloriesController.text.toString());
-                              print(gramsController.text.toString());
-
                               LogItem item = LogItem(
                                   nameController.text.toString(),
                                   int.tryParse(caloriesController.text) ?? 0,
                                   int.tryParse(gramsController.text) ?? 0,
                                   DateTime.now().toString());
 
-                              print('FOOD NAME ${item.foodName}');
-                              print('CALORIES ${item.calories}');
-                              print('GRAMS ${item.grams}');
-
-                              await logProvider.addToLog(item);
+                              await logProvider.addToLog(
+                                  item,
+                                  DateFormat('yyyy-MM-dd')
+                                      .format(logProvider.selectedDay));
                               Navigator.pop(context);
                             },
                             icon: Icon(Icons.add_circle),
@@ -256,9 +250,9 @@ class _HomeState extends State<Home> {
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
                     return CirclePercentage(
-                      totalCalories:
-                          logProvider.currentDayLog().getTotalCalories(),
-                    );
+                        totalCalories:
+                            logProvider.currentDayLog().getTotalCalories(),
+                        context: context);
                   },
                 ),
               ),
@@ -269,10 +263,7 @@ class _HomeState extends State<Home> {
                 ),
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
-                    return CardList(
-                      list: logProvider.currentDayLog(),
-                      user: widget.user,
-                    );
+                    return CardList(list: logProvider.currentDayLog());
                   },
                 ),
               )

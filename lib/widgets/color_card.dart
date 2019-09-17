@@ -11,7 +11,6 @@ class ColorCard extends StatefulWidget {
     this.subtext,
     this.percentageTitle,
     this.logItems,
-    this.user,
   }) : super(key: key);
 
   final Color borderColor;
@@ -19,7 +18,6 @@ class ColorCard extends StatefulWidget {
   final String subtext;
   final String percentageTitle;
   final logItems;
-  final user;
 
   @override
   _ColorCardState createState() => _ColorCardState();

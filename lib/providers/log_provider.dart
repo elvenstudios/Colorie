@@ -4,20 +4,17 @@ import 'package:colorie/models/log_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
 class LogProvider with ChangeNotifier {
   //LOCAL DB INIT
   initState() {
     getLogLocalDB();
-    print(">>>>>>>>>>>>>>>Local DB initState loaded>>>>>>>>>>");
   }
 
   final DatabaseHelper db = DatabaseHelper();
 
   void getLogLocalDB() async {
     _log = await db.getItems();
-    print(">>>>>>>>>>>>>Local DB loaded>>>>>>>>>>>>>>>>>>>>>>>>");
-    print(_log.length());
-    print(_log);
   }
 
   //LOG GETTER/SETTERS
@@ -29,42 +26,34 @@ class LogProvider with ChangeNotifier {
 
   Log currentDayLog() {
     getLogLocalDB();
-    print('currentDayLog');
     Log log = Log();
     log.setLog(_log
         .getLog()
-        .where((e) =>  DateFormat('yyyy-MM-dd').format(DateTime.parse(e.createDateTime)) == DateFormat('yyyy-MM-dd').format(_selectedDay))
+        .where((e) =>
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(e.createDateTime)) ==
+            DateFormat('yyyy-MM-dd').format(_selectedDay))
         .toList());
-    print(log);
     return log;
   }
 
   //delete from log based on ID
-  void removeFromLog(item) {
-    print('removeFromLog');
+  void removeFromLog(item) async {
     var db = new DatabaseHelper();
     db.deleteItem(item);
+    setLog(await db.getItems());
     notifyListeners();
-    print('Deleted');
   }
 
   //add to log
-  Future<void> addToLog(item) async {
-    print('LogProvider addToLog');
-    print(item.foodName);
-    print(item.calories);
-    print(item.grams);
-    await db.saveLog(item);
+  Future<void> addToLog(item,_selectedDay) async {
+    await db.saveLog(item,DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDay)));
     setLog(await db.getItems());
     notifyListeners();
-    print('LogProvider addToLog Saved');
   }
 
   Future<void> setLog(newLog) async {
-    print('LogProvider setLog');
     _log = newLog;
     notifyListeners();
-    print('LogProvider setLog Saved');
   }
 
   //DATETIME GETTER/SETTERS
@@ -83,22 +72,19 @@ class LogProvider with ChangeNotifier {
 
   //set to today
   void setToCurrentDay() {
-    print('set to current');
     selectedDay = today;
-    print(selectedDay);
+    notifyListeners();
   }
 
   //increment day
   void incrementDay() {
-    print('increment');
     selectedDay = selectedDay.add(Duration(days: 1));
-    print(selectedDay);
+    notifyListeners();
   }
 
   //decrement day
   void decrementDay() {
-    print('decrement');
     selectedDay = selectedDay.subtract(Duration(days: 1));
-    print(selectedDay);
+    notifyListeners();
   }
 }

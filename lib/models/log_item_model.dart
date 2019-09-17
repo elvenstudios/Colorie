@@ -44,6 +44,11 @@ class LogItem {
     this._id = id;
   }
 
+
+  set createDateTime(date) {
+    this._createDateTime = date;
+  }
+
   /*
    * Calculates calorie density based on calories and grams
    */
@@ -56,7 +61,6 @@ class LogItem {
    */
   String getColorFromDensity() {
     double density = calculateDensity();
-
     if (density <= 0.6) {
       return "green";
     }
