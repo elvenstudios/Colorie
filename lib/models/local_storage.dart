@@ -26,7 +26,6 @@ class DatabaseHelper {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "database.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
-    print(theDb.toString());
     return theDb;
   }
 
@@ -36,29 +35,18 @@ class DatabaseHelper {
         "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,createDateTime TEXT)");
   }
 
-  Future<int> saveLog(LogItem item) async {
-    print('Local Storage Save Log');
-    print(item.foodName);
-    print(item.calories);
-    print(item.grams);
+  Future<int> saveLog(LogItem item,day) async {
+    item.createDateTime=day;
     var dbClient = await db;
     int res = await dbClient.insert("Log", item.map);
-    print('Local Storage Save Log Saved');
-    print(getItems());
-    print(res);
     return res;
   }
 
   Future<Log> getItems() async {
-    print('>>>>>GETTING ITEMS<<<<<<<<');
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Log');
-    print('Local Storage Get Items');
-    print(list);
     List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
-      print(i);
-      print(list[i]);
       var item = new LogItem(list[i]["foodName"], list[i]["calories"],
           list[i]["grams"], list[i]["createDateTime"]);
       item.setDatabaseFieldID(list[i]["id"]);
@@ -66,15 +54,12 @@ class DatabaseHelper {
     }
     Log log = Log();
     log.setLog(items);
-    print('DB ITEMS');
-    print(log.getLog());
     return log;
   }
 
   Future<int> deleteItem(id) async {
     var dbClient = await db;
-    int res =
-        await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [id]);
+    int res = await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [id]);
     return res;
   }
 
