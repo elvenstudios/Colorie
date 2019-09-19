@@ -1,60 +1,60 @@
+import "dart:math" show pi;
+
+import 'package:colorie/models/log_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:flutter/material.dart';
-import "dart:math" show pi;
-import 'package:colorie/models/log_model.dart';
 import 'package:provider/provider.dart';
 
 class CirclePainter extends CustomPainter {
   BuildContext _context;
-
-  CirclePainter(this._context);
+  Paint _paint;
+  double _fraction;
+  CirclePainter(this._context, this._fraction) {
+    _paint = Paint()
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke;
+  }
 
   BuildContext get context => _context;
 
+  Paint get paintInstance => _paint;
+
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-
-    paint.strokeWidth = 5;
-    paint.style = PaintingStyle.stroke;
-
-    //Log logfile; //get logfile from store
+    print('paint $_fraction');
 
     var rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
 
-    double startAngle = -pi / 2;
     print('Log Painter Log');
-    Log log = Log();
-    log.setLog(Provider.of<LogProvider>(context).log.getLog());
+    Log log = Log()..setLog(Provider.of<LogProvider>(context).log.getLog());
 
-    paint.color = Colors.greenAccent;
-    double greenCurve =log.getGreenPercentageDecimal()  * 360;
-    print('greenCurve $greenCurve');
-    double greenAngle = (pi * greenCurve / 180) ;
-    print('greenAngle $greenAngle');
-    canvas.drawArc(rect, startAngle, greenAngle, false, paint);
+    paintInstance.color = Colors.greenAccent;
+    double startAngle = -pi / 2;
+    double greenAngle = (pi * log.getGreenPercentageDecimal() * 360 / 180);
+    canvas.drawArc(
+        rect, startAngle, greenAngle * _fraction, false, paintInstance);
 
-    paint.color = Colors.yellowAccent;
+    paintInstance.color = Colors.yellowAccent;
     startAngle += greenAngle;
-    double yellowCurve =log.getYellowPercentageDecimal()  * 360;
-    double yellowAngle = (pi * yellowCurve / 180) ;
-    canvas.drawArc(rect, startAngle, yellowAngle, false, paint);
+    double yellowAngle = (pi * log.getYellowPercentageDecimal() * 360 / 180);
+    canvas.drawArc(
+        rect, startAngle, yellowAngle * _fraction, false, paintInstance);
 
-    paint.color = Colors.orangeAccent;
+    paintInstance.color = Colors.orangeAccent;
     startAngle += yellowAngle;
-    double orangeCurve =log.getOrangePercentageDecimal()  * 360;
-    double orangeAngle = (pi * orangeCurve / 180) ;
-    canvas.drawArc(rect, startAngle, orangeAngle, false, paint);
+    double orangeAngle = (pi * log.getOrangePercentageDecimal() * 360 / 180);
+    canvas.drawArc(
+        rect, startAngle, orangeAngle * _fraction, false, paintInstance);
 
-    paint.color = Colors.redAccent;
+    paintInstance.color = Colors.redAccent;
     startAngle += orangeAngle;
-    double redCurve =log.getRedPercentageDecimal()  * 360;
-    double redAngle = (pi * redCurve / 180) ;
-    canvas.drawArc(rect, startAngle, redAngle, false, paint);
+    double redAngle = (pi * log.getRedPercentageDecimal() * 360 / 180);
+    canvas.drawArc(
+        rect, startAngle, redAngle * _fraction, false, paintInstance);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(CirclePainter oldDelegate) {
+    return oldDelegate._fraction != _fraction;
   }
 }

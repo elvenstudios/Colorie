@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import './circle_painter.dart';
 
 class CirclePercentage extends StatefulWidget {
@@ -6,13 +7,33 @@ class CirclePercentage extends StatefulWidget {
 
   var context;
 
-  CirclePercentage({Key key, this.totalCalories,this.context}) : super(key: key);
+  CirclePercentage({Key key, this.totalCalories, this.context})
+      : super(key: key);
 
   @override
   _CirclePercentageState createState() => _CirclePercentageState();
 }
 
-class _CirclePercentageState extends State<CirclePercentage> {
+class _CirclePercentageState extends State<CirclePercentage>
+    with SingleTickerProviderStateMixin {
+  CirclePainter painter;
+  Animation<double> animation;
+  AnimationController controller;
+  double fraction = 0.0;
+
+  initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 5000), vsync: this);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          fraction = animation.value;
+        });
+      });
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +52,7 @@ class _CirclePercentageState extends State<CirclePercentage> {
       width: 225.0,
       height: 225.0,
       child: CustomPaint(
-        painter: CirclePainter(context),
+        painter: CirclePainter(context, fraction),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
