@@ -1,7 +1,8 @@
+import "dart:math" show pi;
+
+import 'package:colorie/models/log_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:flutter/material.dart';
-import "dart:math" show pi;
-import 'package:colorie/models/log_model.dart';
 import 'package:provider/provider.dart';
 
 class CirclePainter extends CustomPainter {
@@ -24,32 +25,31 @@ class CirclePainter extends CustomPainter {
 
     double startAngle = -pi / 2;
     print('Log Painter Log');
-    Log log = Log();
-    log.setLog(Provider.of<LogProvider>(context).log.getLog());
+    Log log = Provider.of<LogProvider>(context).currentDayLog();
 
     paint.color = Colors.greenAccent;
-    double greenCurve =log.getGreenPercentageDecimal()  * 360;
+    double greenCurve = log.getGreenPercentageDecimal() * 360;
     print('greenCurve $greenCurve');
-    double greenAngle = (pi * greenCurve / 180) ;
+    double greenAngle = (pi * greenCurve / 180);
     print('greenAngle $greenAngle');
     canvas.drawArc(rect, startAngle, greenAngle, false, paint);
 
     paint.color = Colors.yellowAccent;
     startAngle += greenAngle;
-    double yellowCurve =log.getYellowPercentageDecimal()  * 360;
-    double yellowAngle = (pi * yellowCurve / 180) ;
+    double yellowCurve = log.getYellowPercentageDecimal() * 360;
+    double yellowAngle = (pi * yellowCurve / 180);
     canvas.drawArc(rect, startAngle, yellowAngle, false, paint);
 
     paint.color = Colors.orangeAccent;
     startAngle += yellowAngle;
-    double orangeCurve =log.getOrangePercentageDecimal()  * 360;
-    double orangeAngle = (pi * orangeCurve / 180) ;
+    double orangeCurve = log.getOrangePercentageDecimal() * 360;
+    double orangeAngle = (pi * orangeCurve / 180);
     canvas.drawArc(rect, startAngle, orangeAngle, false, paint);
 
     paint.color = Colors.redAccent;
     startAngle += orangeAngle;
-    double redCurve =log.getRedPercentageDecimal()  * 360;
-    double redAngle = (pi * redCurve / 180) ;
+    double redCurve = log.getRedPercentageDecimal() * 360;
+    double redAngle = (pi * redCurve / 180);
     canvas.drawArc(rect, startAngle, redAngle, false, paint);
   }
 
