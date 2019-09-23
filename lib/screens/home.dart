@@ -138,14 +138,6 @@ class _HomeState extends State<Home> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            Consumer<LogProvider>(builder: (context, logProvider, __) {
-              return IconButton(
-                icon: Icon(FeatherIcons.calendar),
-                onPressed: () => logProvider.setDatePicker(context),
-              );
-            })
-          ],
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
           centerTitle: true,
@@ -162,11 +154,14 @@ class _HomeState extends State<Home> {
                 },
               ),
               Consumer<LogProvider>(builder: (context, logProvider, __) {
-                return Text(
-                  "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
-                  style: TextStyle(
-                    color: Colors.black,
+                return MaterialButton(
+                  child: Text(
+                    "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
+                  onPressed: () => logProvider.setDatePicker(context),
                 );
               }),
               Consumer<LogProvider>(
