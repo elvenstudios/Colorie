@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-import 'lading_page.dart';
+import 'home.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -12,9 +11,10 @@ class _SettingsState extends State<Settings> {
   bool pushNotifValue = false;
   bool darkThemeValue = false;
 
-  
-  void _onChangedPushNotif(bool value) => setState(() => pushNotifValue = value);
-  void _onChangeddarkTheme(bool value) => setState(() => darkThemeValue = value);
+  void _onChangedPushNotif(bool value) =>
+      setState(() => pushNotifValue = value);
+  void _onChangeddarkTheme(bool value) =>
+      setState(() => darkThemeValue = value);
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +44,7 @@ class _SettingsState extends State<Settings> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => LandingPage()),
+                          MaterialPageRoute(builder: (context) => Home()),
                         );
                       },
                     ),
@@ -69,8 +68,7 @@ class _SettingsState extends State<Settings> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => LandingPage()),
+                          MaterialPageRoute(builder: (context) => Home()),
                         );
                       },
                     ),
@@ -124,7 +122,11 @@ class _SettingsState extends State<Settings> {
                         fontFamily: "Raleway",
                         fontWeight: FontWeight.bold),
                   ),
-                  Switch(value: pushNotifValue, onChanged: _onChangedPushNotif,activeColor: Colors.blueAccent,),
+                  Switch(
+                    value: pushNotifValue,
+                    onChanged: _onChangedPushNotif,
+                    activeColor: Colors.blueAccent,
+                  ),
                 ],
               ),
               Row(
@@ -138,7 +140,11 @@ class _SettingsState extends State<Settings> {
                         fontFamily: "Raleway",
                         fontWeight: FontWeight.bold),
                   ),
-                  Switch(value: darkThemeValue, onChanged: _onChangeddarkTheme,activeColor: Colors.blueAccent,),
+                  Switch(
+                    value: darkThemeValue,
+                    onChanged: _onChangeddarkTheme,
+                    activeColor: Colors.blueAccent,
+                  ),
                 ],
               ),
               Padding(
@@ -202,7 +208,7 @@ class _SettingsState extends State<Settings> {
               Row(
                 children: <Widget>[
                   RaisedButton(
-                    onPressed:() {
+                    onPressed: () {
                       Navigator.pop(context);
                     },
                     color: Colors.blueAccent,

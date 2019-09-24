@@ -1,21 +1,62 @@
 import 'package:colorie/models/local_storage.dart';
+import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 
 class LogProvider with ChangeNotifier {
-  final DatabaseHelper db = DatabaseHelper();
-  static Log _log = Log();
-
-  void getLogLocalDB() async {
-    _log = await db.getItems();
-    print("Local DB loaded");
-    print(_log.length());
-  }
-
+  //LOCAL DB INIT
   initState() {
     getLogLocalDB();
   }
 
+  final DatabaseHelper db = DatabaseHelper();
+
+  void getLogLocalDB() async {
+    _log = await db.getItems();
+  }
+
+  //LOG GETTER/SETTERS
+  static Log _log = Log();
+
+  Log get log => _log;
+
+  set log(val) => _log = val;
+
+  Log currentDayLog() {
+    getLogLocalDB();
+    Log log = Log();
+    log.setLog(_log
+        .getLog()
+        .where((e) =>
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(e.createDateTime)) ==
+            DateFormat('yyyy-MM-dd').format(_selectedDay))
+        .toList());
+    return log;
+  }
+
+  //delete from log based on ID
+  void removeFromLog(item) async {
+    var db = new DatabaseHelper();
+    db.deleteItem(item);
+    setLog(await db.getItems());
+    notifyListeners();
+  }
+
+  //add to log
+  Future<void> addToLog(item,_selectedDay) async {
+    await db.saveLog(item,DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDay)));
+    setLog(await db.getItems());
+    notifyListeners();
+  }
+
+  Future<void> setLog(newLog) async {
+    _log = newLog;
+    notifyListeners();
+  }
+
+  //DATETIME GETTER/SETTERS
   static final DateTime _today = DateTime.now();
   static DateTime _selectedDay = _today;
 
@@ -25,7 +66,6 @@ class LogProvider with ChangeNotifier {
   DateTime get selectedDay => _selectedDay;
 
   set selectedDay(val) {
-    print('SELECTDAY SET $val');
     _selectedDay = val;
     notifyListeners();
   }
@@ -55,35 +95,19 @@ class LogProvider with ChangeNotifier {
 
   //set to today
   void setToCurrentDay() {
-    print('set to current');
     selectedDay = today;
-    print(selectedDay);
+    notifyListeners();
   }
 
   //increment day
   void incrementDay() {
-    print('increment');
     selectedDay = selectedDay.add(Duration(days: 1));
-    print(selectedDay);
+    notifyListeners();
   }
 
   //decrement day
   void decrementDay() {
-    print('decrement');
     selectedDay = selectedDay.subtract(Duration(days: 1));
-    print(selectedDay);
-  }
-
-  //delete from log based on ID
-  void removeFromLog(item) {
-    print('removeFromLog');
-    var db = new DatabaseHelper();
-    db.deleteItem(item);
-  }
-
-  //add to log
-  void addToLog(item) {
-    print('addToLog');
-    db.saveLog(item);
+    notifyListeners();
   }
 }

@@ -26,36 +26,30 @@ class DatabaseHelper {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "database.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
-    print(theDb.toString());
     return theDb;
   }
 
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,create_dt_tm TEXT)");
+        "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,createDateTime TEXT)");
   }
 
-  Future<int> saveLog(LogItem item) async {
+  Future<int> saveLog(LogItem item,day) async {
+    item.createDateTime=day;
     var dbClient = await db;
-    int res = await dbClient.insert("Log", item.toMap());
-    print(res);
+    int res = await dbClient.insert("Log", item.map);
     return res;
   }
 
   Future<Log> getItems() async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Log');
-    print(list);
-    List items = [];
+    List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
-      var item = new LogItem({
-        'foodname': list[i]["foodName"],
-        'calories': list[i]["calories"],
-        'grams': list[i]["grams"],
-        'create_dt_tm': list[i]["create_dt_tm"]
-      });
-      item.setUserId(list[i]["id"]);
+      var item = new LogItem(list[i]["foodName"], list[i]["calories"],
+          list[i]["grams"], list[i]["createDateTime"]);
+      item.setDatabaseFieldID(list[i]["id"]);
       items.add(item);
     }
     Log log = Log();
@@ -63,10 +57,9 @@ class DatabaseHelper {
     return log;
   }
 
-  Future<int> deleteItem(LogItem item) async {
+  Future<int> deleteItem(id) async {
     var dbClient = await db;
-    int res =
-        await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [item.id]);
+    int res = await dbClient.rawDelete('DELETE FROM Log WHERE id = ?', [id]);
     return res;
   }
 

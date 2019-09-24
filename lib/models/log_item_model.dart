@@ -7,27 +7,9 @@ class LogItem {
   String _foodName;
   num _calories;
   num _grams;
-  String _create_dt_tm;
+  String _createDateTime;
 
-  LogItem(Map<String, String> map,
-      {int id,
-      String foodName,
-      num calories,
-      num grams,
-      String create_dt_tm,
-      ref})
-      : _id = id,
-        _foodName = foodName,
-        _calories = calories,
-        _grams = grams,
-        _create_dt_tm = create_dt_tm;
-
-  LogItem.map(dynamic obj) {
-    this._foodName = obj["foodName"];
-    this._calories = obj["calories"];
-    this._grams = obj["grams"];
-    this._create_dt_tm = obj["create_dt_tm"];
-  }
+  LogItem(this._foodName, this._calories, this._grams, this._createDateTime);
 
   int get id => _id;
 
@@ -37,19 +19,34 @@ class LogItem {
 
   num get grams => _grams;
 
-  String get create_dt_tm => _create_dt_tm;
+  String get createDateTime => _createDateTime;
 
-  Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map["foodName"] = _foodName;
-    map["calories"] = _calories;
-    map["grams"] = _grams;
-    map["create_dt_tm"] = _create_dt_tm;
-    return map;
+  LogItem.map(dynamic obj) {
+    this._foodName = obj["foodName"];
+    this._calories = obj["calories"];
+    this._grams = obj["grams"];
+    this._createDateTime = obj["createDateTime"];
   }
 
-  void setUserId(int id) {
+  Map<String, dynamic> get map {
+    return {
+      "foodName": _foodName,
+      "calories": _calories,
+      "grams": _grams,
+      "createDateTime": createDateTime,
+    };
+  }
+
+  /*
+   * Needed to set database ID to log model to allow item to be deleted from DB
+   */
+  void setDatabaseFieldID(int id) {
     this._id = id;
+  }
+
+
+  set createDateTime(date) {
+    this._createDateTime = date;
   }
 
   /*
@@ -64,7 +61,6 @@ class LogItem {
    */
   String getColorFromDensity() {
     double density = calculateDensity();
-
     if (density <= 0.6) {
       return "green";
     }
