@@ -2,6 +2,7 @@ import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/settings.dart';
 import 'package:colorie/widgets/card_list.dart';
+import 'package:colorie/widgets/circle_percentage.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

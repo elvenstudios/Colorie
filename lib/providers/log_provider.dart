@@ -1,9 +1,7 @@
 import 'package:colorie/models/local_storage.dart';
-import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/models/log_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 
 class LogProvider with ChangeNotifier {
   //LOCAL DB INIT
@@ -45,8 +43,9 @@ class LogProvider with ChangeNotifier {
   }
 
   //add to log
-  Future<void> addToLog(item,_selectedDay) async {
-    await db.saveLog(item,DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDay)));
+  Future<void> addToLog(item, _selectedDay) async {
+    await db.saveLog(
+        item, DateFormat('yyyy-MM-dd').format(DateTime.parse(_selectedDay)));
     setLog(await db.getItems());
     notifyListeners();
   }
@@ -88,10 +87,6 @@ class LogProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
-  Log get log => _log;
-
-  set log(val) => _log = val;
 
   //set to today
   void setToCurrentDay() {
