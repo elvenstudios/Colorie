@@ -26,7 +26,7 @@ class CirclePainter extends CustomPainter {
     var rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
 
     print('Log Painter Log');
-    Log log = Log()..setLog(Provider.of<LogProvider>(context).log.getLog());
+    Log log = Provider.of<LogProvider>(context).currentDayLog();
 
     paintInstance.color = Colors.greenAccent;
     double startAngle = -pi / 2;
