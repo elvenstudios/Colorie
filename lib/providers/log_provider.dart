@@ -70,6 +70,29 @@ class LogProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<Null> setDatePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2016),
+      lastDate: DateTime(2030),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child,
+        );
+      },
+    );
+    if (picked != null && picked != _selectedDay) {
+      _selectedDay = picked;
+      notifyListeners();
+    }
+  }
+
+  Log get log => _log;
+
+  set log(val) => _log = val;
+
   //set to today
   void setToCurrentDay() {
     selectedDay = today;
