@@ -86,19 +86,39 @@ class Log {
   }
 
   getGreenLogItems() {
-    return _log.where((logItem) => logItem.getColorFromDensity() == 'green');
+    var greenLog = _log
+        .where((logItem) => logItem.getColorFromDensity() == 'green')
+        .toList();
+    LogItem newItem = LogItem('Green is good', 0, 0, '0');
+    greenLog.insert(0, newItem);
+    return greenLog;
   }
 
   getYellowLogItems() {
-    return _log.where((logItem) => logItem.getColorFromDensity() == 'yellow');
+    var yellowLog = _log
+        .where((logItem) => logItem.getColorFromDensity() == 'yellow')
+        .toList();
+    LogItem newItem = LogItem('Yellow is kinda good', 0, 0, '0');
+    yellowLog.insert(0, newItem);
+    return yellowLog;
   }
 
   getOrangeLogItems() {
-    return _log.where((logItem) => logItem.getColorFromDensity() == 'orange');
+    var orangeLog = _log
+        .where((logItem) => logItem.getColorFromDensity() == 'orange')
+        .toList();
+    LogItem newItem = LogItem('Orange is kinda bad', 0, 0, '0');
+    orangeLog.insert(0, newItem);
+    return orangeLog;
   }
 
   getRedLogItems() {
-    return _log.where((logItem) => logItem.getColorFromDensity() == 'red');
+    var redLog = _log
+        .where((logItem) => logItem.getColorFromDensity() == 'red')
+        .toList();
+    LogItem newItem = LogItem('Red is bad', 0, 0, '0');
+    redLog.insert(0, newItem);
+    return redLog;
   }
 
   num getTotalCalories() {
