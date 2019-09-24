@@ -7,124 +7,137 @@ import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  Home({Key key, this.title, this.user}) : super(key: key);
+  Home({Key key, this.title}) : super(key: key);
 
   final String title;
-  final user;
-
-  LogItem convertToLogItem(item) {
-    return new LogItem({
-      'calories': item['calories'],
-      'grams': item['grams'],
-      'name': item['name'],
-      'ref': item
-    });
-  }
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-getUserName(name) {
-  if (name != null) {
-    return name;
-  }
-  return 'User';
-}
-
 void _showAddItemBottomSheet(context) {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController caloriesController = TextEditingController();
+  TextEditingController gramsController = TextEditingController();
+
+  //DEFAULT VALUES FOR TESTING
+  nameController.text = 'Lettuce';
+  caloriesController.text = '20';
+  gramsController.text = '600';
+
   showBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: <Widget>[
-              Column(
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(builder: (_) => LogProvider()),
+          ],
+          child: Consumer<LogProvider>(builder: (context, logProvider, __) {
+            return Container(
+              padding: EdgeInsets.all(16.0),
+              child: ListView(
+                scrollDirection: Axis.vertical,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  Column(
                     children: <Widget>[
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(FeatherIcons.camera),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(FeatherIcons.search),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Name',
-                            border: InputBorder.none,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(FeatherIcons.camera),
                           ),
-                        ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(FeatherIcons.search),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Calories',
-                            border: InputBorder.none,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                labelText: 'Name',
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Grams',
-                            border: InputBorder.none,
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: caloriesController,
+                              decoration: InputDecoration(
+                                labelText: 'Calories',
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: FloatingActionButton.extended(
-                          backgroundColor: Colors.redAccent,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          label: Text("Cancel"),
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextField(
+                              keyboardType: TextInputType.text,
+                              controller: gramsController,
+                              decoration: InputDecoration(
+                                labelText: 'Grams',
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      FloatingActionButton.extended(
-                        backgroundColor: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.add_circle),
-                        label: Text("Log Food"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: FloatingActionButton.extended(
+                              backgroundColor: Colors.redAccent,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              label: Text("Cancel"),
+                            ),
+                          ),
+                          FloatingActionButton.extended(
+                            backgroundColor: Colors.blueAccent,
+                            onPressed: () async {
+                              LogItem item = LogItem(
+                                  nameController.text.toString(),
+                                  int.tryParse(caloriesController.text) ?? 0,
+                                  int.tryParse(gramsController.text) ?? 0,
+                                  DateTime.now().toString());
+
+                              await logProvider.addToLog(
+                                  item,
+                                  DateFormat('yyyy-MM-dd')
+                                      .format(logProvider.selectedDay));
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.add_circle),
+                            label: Text("Log Food"),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-            ],
-          ),
+            );
+          }),
         );
       });
 }
@@ -166,7 +179,9 @@ class _HomeState extends State<Home> {
               ),
               Consumer<LogProvider>(builder: (context, logProvider, __) {
                 return Text(
-                  "${logProvider.selectedDay.month}/${logProvider.selectedDay.day}/${logProvider.selectedDay.year}",
+                  "${logProvider.selectedDay.month}"
+                  "/${logProvider.selectedDay.day}"
+                  "/${logProvider.selectedDay.year}",
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -231,15 +246,24 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.only(
+                    top: 10.0, bottom: 10.0, left: 65.0, right: 65.0),
+                child: Consumer<LogProvider>(
+                  builder: (context, logProvider, __) {
+                    return CirclePercentage(
+                        totalCalories:
+                            logProvider.currentDayLog().getTotalCalories(),
+                        context: context);
+                  },
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(
                   top: 10.0,
                   bottom: 60.0,
                 ),
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
-                    return CardList(
-                      list: logProvider.log,
-                      user: widget.user,
-                    );
+                    return CardList(list: logProvider.currentDayLog());
                   },
                 ),
               )

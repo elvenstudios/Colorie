@@ -1,5 +1,7 @@
+import 'package:colorie/providers/log_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:feather_icons_flutter/feather_icons_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ColorCard extends StatefulWidget {
   ColorCard({
@@ -9,7 +11,6 @@ class ColorCard extends StatefulWidget {
     this.subtext,
     this.percentageTitle,
     this.logItems,
-    this.user,
   }) : super(key: key);
 
   final Color borderColor;
@@ -17,11 +18,9 @@ class ColorCard extends StatefulWidget {
   final String subtext;
   final String percentageTitle;
   final logItems;
-  final user;
 
   @override
   _ColorCardState createState() => _ColorCardState();
-
 }
 
 class _ColorCardState extends State<ColorCard> {
@@ -147,17 +146,22 @@ class _ColorCardState extends State<ColorCard> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 final item = widget.logItems.toList()[index];
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text("${item.calories.toString()} calories"),
-                  trailing: IconButton(
-                    icon: Icon(FeatherIcons.xCircle, color: Colors.pinkAccent,),
-                    tooltip: 'Remove Item From Log',
-                    onPressed: () {
-                      //Delete Item;
-                    },
-                  ),
-                );
+                return Consumer<LogProvider>(builder: (context, logProvider, __) {
+                  return ListTile(
+                    title: Text(item.foodName),
+                    subtitle: Text("${item.calories.toString()} calories"),
+                    trailing: IconButton(
+                      icon: Icon(
+                        FeatherIcons.xCircle,
+                        color: Colors.pinkAccent,
+                      ),
+                      tooltip: 'Remove Item From Log',
+                      onPressed: () {
+                        logProvider.removeFromLog(item.id);
+                      },
+                    ),
+                  );
+                });
               },
             ),
           )
