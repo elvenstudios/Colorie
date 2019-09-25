@@ -152,12 +152,27 @@ class _HomeState extends State<Home> {
       ],
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
-          centerTitle: true,
           titleSpacing: 0.0,
+          centerTitle: true,
+          actions: <Widget>[
+            MaterialButton(
+              child: Icon(
+                Icons.settings,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
+              },
+            )
+          ],
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Consumer<LogProvider>(
                 builder: (context, logProvider, __) {
@@ -189,49 +204,6 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        drawer: Drawer(
-            child: Column(children: <Widget>[
-          DrawerHeader(child: Consumer<LogProvider>(
-            builder: (context, logProvider, __) {
-              return Text('USER');
-            },
-          )),
-          Expanded(
-              child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              ListTile(
-                title: Text('Remove Ads'),
-                leading: Icon(Icons.play_arrow),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text('Settings'),
-                leading: Icon(Icons.settings),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings()),
-                  );
-                },
-              ),
-            ],
-          )),
-          Container(
-            color: Colors.black,
-            width: double.infinity,
-            height: 0.1,
-          ),
-          Container(
-              padding: EdgeInsets.all(10),
-              height: 100,
-              child: ListTile(
-                  title: Text('Logout'),
-                  leading: Icon(Icons.account_circle),
-                  onTap: () {
-                    Navigator.pop(context);
-                  })),
-        ])),
         body: Center(
           child: ListView(
             children: <Widget>[
