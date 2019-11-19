@@ -35,11 +35,10 @@ class DatabaseHelper {
         "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,createDateTime TEXT)");
   }
 
-  Future<int> saveLog(LogItem item,day) async {
-    item.createDateTime=day;
+  Future<int> saveLog(LogItem item, day) async {
+    item.createDateTime = day;
     var dbClient = await db;
-    int res = await dbClient.insert("Log", item.map);
-    return res;
+    return await dbClient.insert("Log", item.map);
   }
 
   Future<Log> getItems() async {

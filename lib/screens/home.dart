@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  Home({Key key, this.title}) : super(key: key);
+  Home({Key key, this.title, BuildContext context}) : super(key: key);
 
   final String title;
 
@@ -19,131 +19,131 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-void _showAddItemBottomSheet(context) {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController caloriesController = TextEditingController();
-  TextEditingController gramsController = TextEditingController();
+class _HomeState extends State<Home> {
+  void _showAddItemBottomSheet() {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController caloriesController = TextEditingController();
+    TextEditingController gramsController = TextEditingController();
 
-  //DEFAULT VALUES FOR TESTING
-  nameController.text = 'Lettuce';
-  caloriesController.text = '20';
-  gramsController.text = '600';
+    //DEFAULT VALUES FOR TESTING
+    nameController.text = 'Lettuce';
+    caloriesController.text = '20';
+    gramsController.text = '600';
 
-  showBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(builder: (_) => LogProvider()),
-          ],
-          child: Consumer<LogProvider>(builder: (context, logProvider, __) {
-            return Container(
-              padding: EdgeInsets.all(16.0),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(FeatherIcons.camera),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(FeatherIcons.search),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              keyboardType: TextInputType.text,
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                labelText: 'Name',
-                                border: InputBorder.none,
+    showBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(builder: (_) => LogProvider()),
+            ],
+            child: Consumer<LogProvider>(builder: (context, logProvider, __) {
+              return Container(
+                padding: EdgeInsets.all(16.0),
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(FeatherIcons.camera),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(FeatherIcons.search),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                keyboardType: TextInputType.text,
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  labelText: 'Name',
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              keyboardType: TextInputType.text,
-                              controller: caloriesController,
-                              decoration: InputDecoration(
-                                labelText: 'Calories',
-                                border: InputBorder.none,
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                keyboardType: TextInputType.text,
+                                controller: caloriesController,
+                                decoration: InputDecoration(
+                                  labelText: 'Calories',
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                              keyboardType: TextInputType.text,
-                              controller: gramsController,
-                              decoration: InputDecoration(
-                                labelText: 'Grams',
-                                border: InputBorder.none,
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                keyboardType: TextInputType.text,
+                                controller: gramsController,
+                                decoration: InputDecoration(
+                                  labelText: 'Grams',
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: FloatingActionButton.extended(
-                              backgroundColor: Colors.redAccent,
-                              onPressed: () {
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: FloatingActionButton.extended(
+                                backgroundColor: Colors.redAccent,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                label: Text("Cancel"),
+                              ),
+                            ),
+                            FloatingActionButton.extended(
+                              backgroundColor: Colors.blueAccent,
+                              onPressed: () async {
+                                LogItem item = LogItem(
+                                    nameController.text.toString(),
+                                    int.tryParse(caloriesController.text) ?? 0,
+                                    int.tryParse(gramsController.text) ?? 0,
+                                    DateTime.now().toString());
+
+                                await logProvider.addToLog(
+                                    item,
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(logProvider.selectedDay));
+                                setState(() {});
                                 Navigator.pop(context);
                               },
-                              label: Text("Cancel"),
+                              icon: Icon(Icons.add_circle),
+                              label: Text("Log Food"),
                             ),
-                          ),
-                          FloatingActionButton.extended(
-                            backgroundColor: Colors.blueAccent,
-                            onPressed: () async {
-                              LogItem item = LogItem(
-                                  nameController.text.toString(),
-                                  int.tryParse(caloriesController.text) ?? 0,
-                                  int.tryParse(gramsController.text) ?? 0,
-                                  DateTime.now().toString());
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }),
+          );
+        });
+  }
 
-                              await logProvider.addToLog(
-                                  item,
-                                  DateFormat('yyyy-MM-dd')
-                                      .format(logProvider.selectedDay));
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.add_circle),
-                            label: Text("Log Food"),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }),
-        );
-      });
-}
-
-class _HomeState extends State<Home> {
-  @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return MultiProvider(
@@ -236,7 +236,7 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: Colors.blueAccent,
           onPressed: () {
-            _showAddItemBottomSheet(context);
+            _showAddItemBottomSheet();
           },
           icon: Icon(Icons.add_circle),
           label: Text("Log Food"),

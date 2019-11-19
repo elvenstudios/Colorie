@@ -24,14 +24,11 @@ class CirclePainter extends CustomPainter {
     var rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
 
     double startAngle = -pi / 2;
-    print('Log Painter Log');
     Log log = Provider.of<LogProvider>(context).currentDayLog();
 
     paint.color = Colors.greenAccent;
     double greenCurve = log.getGreenPercentageDecimal() * 360;
-    print('greenCurve $greenCurve');
     double greenAngle = (pi * greenCurve / 180);
-    print('greenAngle $greenAngle');
     canvas.drawArc(rect, startAngle, greenAngle, false, paint);
 
     paint.color = Colors.yellowAccent;
