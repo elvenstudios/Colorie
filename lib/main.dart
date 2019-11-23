@@ -10,15 +10,25 @@ void main() {
   );
 }
 
+class CustomColors {
+  static const goodColor = Colors.greenAccent;
+  static const almostGoodColor = Colors.yellowAccent;
+  static const almostBadColor = Colors.orangeAccent;
+  static const badColor = Colors.redAccent;
+}
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Colorie',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
+          textTheme: TextTheme(
+        body1: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            fontFamily: "Raleway",
+            fontWeight: FontWeight.bold),
+      )),
       home: Scaffold(body: Home(title: 'title')),
       debugShowCheckedModeBanner: false,
     );

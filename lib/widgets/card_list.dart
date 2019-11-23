@@ -1,3 +1,4 @@
+import 'package:colorie/main.dart';
 import 'package:colorie/models/log_model.dart';
 import 'package:colorie/widgets/color_card.dart';
 import 'package:flutter/material.dart';
@@ -20,28 +21,28 @@ class _CardListState extends State<CardList> {
       children: <Widget>[
         ColorCard(
           title: 'Lots',
-          borderColor: Colors.greenAccent,
+          borderColor: CustomColors.goodColor,
           subtext: 'Goal: 60% or more',
           percentageTitle: widget.list.getGreenPercentage(),
           logItems: widget.list.getGreenLogItems(),
         ),
         ColorCard(
           title: 'Plenty',
-          borderColor: Colors.amberAccent,
+          borderColor: CustomColors.almostGoodColor,
           subtext: 'Goal: 25% or more',
           percentageTitle: widget.list.getYellowPercentage(),
           logItems: widget.list.getYellowLogItems(),
         ),
         ColorCard(
           title: 'Some',
-          borderColor: Colors.orangeAccent,
+          borderColor: CustomColors.almostBadColor,
           subtext: 'Goal: 10% or less',
           percentageTitle: widget.list.getOrangePercentage(),
           logItems: widget.list.getOrangeLogItems(),
         ),
         ColorCard(
           title: 'Few',
-          borderColor: Colors.pinkAccent,
+          borderColor: CustomColors.badColor,
           subtext: 'Goal: 5% or less',
           percentageTitle: widget.list.getRedPercentage(),
           logItems: widget.list.getRedLogItems(),

@@ -1,3 +1,4 @@
+import 'package:colorie/main.dart';
 import 'package:colorie/models/log_item_model.dart';
 import 'package:colorie/providers/log_provider.dart';
 import 'package:colorie/screens/settings.dart';
@@ -106,7 +107,7 @@ class _HomeState extends State<Home> {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: FloatingActionButton.extended(
-                                backgroundColor: Colors.redAccent,
+                                backgroundColor: CustomColors.badColor,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },

@@ -11,11 +11,6 @@ class _SettingsState extends State<Settings> {
   bool pushNotifValue = false;
   bool darkThemeValue = false;
 
-  void _onChangedPushNotif(bool value) =>
-      setState(() => pushNotifValue = value);
-  void _onChangeddarkTheme(bool value) =>
-      setState(() => darkThemeValue = value);
-
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: <Widget>[
@@ -35,11 +30,7 @@ class _SettingsState extends State<Settings> {
                     InkWell(
                       child: Text(
                         'Cancel',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.body1,
                       ),
                       onTap: () {
                         Navigator.push(
@@ -50,20 +41,12 @@ class _SettingsState extends State<Settings> {
                     ),
                     Text(
                       'Edit Profile',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: "Raleway",
-                          fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.body1,
                     ),
                     InkWell(
                       child: Text(
                         'Done',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.body1,
                       ),
                       onTap: () {
                         Navigator.push(
@@ -103,11 +86,7 @@ class _SettingsState extends State<Settings> {
                 children: <Widget>[
                   Text(
                     'Options',
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 12.0,
-                        fontFamily: "Raleway",
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.body1,
                   ),
                 ],
               ),
@@ -116,15 +95,15 @@ class _SettingsState extends State<Settings> {
                 children: <Widget>[
                   Text(
                     'Push Notifications',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 25.0,
-                        fontFamily: "Raleway",
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.body1,
                   ),
                   Switch(
                     value: pushNotifValue,
-                    onChanged: _onChangedPushNotif,
+                    onChanged: (bool newValue) {
+                      setState(() {
+                        pushNotifValue = newValue;
+                      });
+                    },
                     activeColor: Colors.blueAccent,
                   ),
                 ],
@@ -134,15 +113,15 @@ class _SettingsState extends State<Settings> {
                 children: <Widget>[
                   Text(
                     'Dark Theme',
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 25.0,
-                        fontFamily: "Raleway",
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.body1,
                   ),
                   Switch(
                     value: darkThemeValue,
-                    onChanged: _onChangeddarkTheme,
+                    onChanged: (bool newValue) {
+                      setState(() {
+                        darkThemeValue = newValue;
+                      });
+                    },
                     activeColor: Colors.blueAccent,
                   ),
                 ],
@@ -155,11 +134,7 @@ class _SettingsState extends State<Settings> {
                 children: <Widget>[
                   Text(
                     'Account',
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontSize: 12.0,
-                        fontFamily: "Raleway",
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.body1,
                   ),
                 ],
               ),
@@ -168,12 +143,10 @@ class _SettingsState extends State<Settings> {
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.blueAccent,
-                    child: const Text('Reset password',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Reset password',
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
                 ],
               ),
@@ -182,12 +155,10 @@ class _SettingsState extends State<Settings> {
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.blueAccent,
-                    child: const Text('Connect Fitbit™',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Connect Fitbit™',
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
                 ],
               ),
@@ -196,12 +167,10 @@ class _SettingsState extends State<Settings> {
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.blueAccent,
-                    child: const Text('Remove Ads',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Remove Ads',
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
                 ],
               ),
@@ -212,12 +181,10 @@ class _SettingsState extends State<Settings> {
                       Navigator.pop(context);
                     },
                     color: Colors.blueAccent,
-                    child: const Text('Log Out',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontFamily: "Raleway",
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Log Out',
+                      style: Theme.of(context).textTheme.body1,
+                    ),
                   ),
                 ],
               ),
