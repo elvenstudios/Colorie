@@ -44,7 +44,6 @@ class LogItem {
     this._id = id;
   }
 
-
   set createDateTime(date) {
     this._createDateTime = date;
   }

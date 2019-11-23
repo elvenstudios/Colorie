@@ -36,7 +36,7 @@ class LogProvider with ChangeNotifier {
 
   //delete from log based on ID
   void removeFromLog(item) async {
-    var db = new DatabaseHelper();
+    var db = DatabaseHelper();
     db.deleteItem(item);
     setLog(await db.getItems());
     notifyListeners();

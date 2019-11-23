@@ -9,7 +9,7 @@ import 'log_item_model.dart';
 import 'log_model.dart';
 
 class DatabaseHelper {
-  static final DatabaseHelper _instance = new DatabaseHelper.internal();
+  static final DatabaseHelper _instance = DatabaseHelper.internal();
 
   factory DatabaseHelper() => _instance;
   static Database _db;
@@ -50,7 +50,7 @@ class DatabaseHelper {
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Log');
     List<LogItem> items = [];
     for (int i = 0; i < list.length; i++) {
-      var item = new LogItem(list[i]["foodName"], list[i]["calories"],
+      var item = LogItem(list[i]["foodName"], list[i]["calories"],
           list[i]["grams"], list[i]["createDateTime"]);
       item.setDatabaseFieldID(list[i]["id"]);
       items.add(item);

@@ -57,17 +57,17 @@ class _SettingsState extends State<Settings> {
                     ),
                   ],
                 ),
-                new Container(
+                Container(
                     width: 150.0,
                     height: 150.0,
                     margin: EdgeInsets.only(
                       top: 50.0,
                     ),
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: new DecorationImage(
+                        image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: new NetworkImage(
+                            image: NetworkImage(
                                 "https://randomuser.me/api/portraits/lego/6.jpg")))),
               ],
             ),

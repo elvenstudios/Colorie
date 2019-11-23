@@ -20,7 +20,7 @@ class CirclePainter extends CustomPainter {
     paint.strokeWidth = 5;
     paint.style = PaintingStyle.stroke;
 
-    var rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    var rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
 
     double startAngle = -pi / 2;
     Log log = Provider.of<LogProvider>(context).currentDayLog();

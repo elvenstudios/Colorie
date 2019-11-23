@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import './circle_painter.dart';
 
 class CirclePercentage extends StatefulWidget {
@@ -6,7 +7,8 @@ class CirclePercentage extends StatefulWidget {
 
   var context;
 
-  CirclePercentage({Key key, this.totalCalories,this.context}) : super(key: key);
+  CirclePercentage({Key key, this.totalCalories, this.context})
+      : super(key: key);
 
   @override
   _CirclePercentageState createState() => _CirclePercentageState();
@@ -20,9 +22,9 @@ class _CirclePercentageState extends State<CirclePercentage> {
         color: Colors.white,
         shape: BoxShape.circle,
         boxShadow: [
-          new BoxShadow(
+          BoxShadow(
               color: Colors.grey,
-              offset: new Offset(5.0, 5.0),
+              offset: Offset(5.0, 5.0),
               spreadRadius: 1.0,
               blurRadius: 20.0)
         ],
