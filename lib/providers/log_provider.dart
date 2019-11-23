@@ -73,8 +73,8 @@ class LogProvider with ChangeNotifier {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2016),
-      lastDate: DateTime(2030),
+      firstDate: today.subtract(Duration(days: 365 * 2)),
+      lastDate: today.add(Duration(days: 365 * 2)),
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.light(),

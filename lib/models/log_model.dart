@@ -58,51 +58,51 @@ class Log {
   }
 
   String getGreenPercentage() {
-    if ((getGreenPercentageDecimal() * 100).isNaN) return '0%';
-    return "${(getGreenPercentageDecimal() * 100).toStringAsFixed(1)}%";
+    return ((getGreenPercentageDecimal() * 100).isNaN)
+        ? '0%'
+        : "${(getGreenPercentageDecimal() * 100).toStringAsFixed(1)}%";
   }
 
   String getYellowPercentage() {
-    if ((getYellowPercentageDecimal() * 100).isNaN) return '0%';
-    return "${(getYellowPercentageDecimal() * 100).toStringAsFixed(1)}%";
+    return ((getYellowPercentageDecimal() * 100).isNaN)
+        ? '0%'
+        : "${(getYellowPercentageDecimal() * 100).toStringAsFixed(1)}%";
   }
 
   String getOrangePercentage() {
-    if ((getOrangePercentageDecimal() * 100).isNaN) return '0%';
-    return "${(getOrangePercentageDecimal() * 100).toStringAsFixed(1)}%";
+    return ((getOrangePercentageDecimal() * 100).isNaN)
+        ? '0%'
+        : "${(getOrangePercentageDecimal() * 100).toStringAsFixed(1)}%";
   }
 
   String getRedPercentage() {
-    if ((getRedPercentageDecimal() * 100).isNaN) return '0%';
-    return "${(getRedPercentageDecimal() * 100).toStringAsFixed(1)}%";
+    return ((getRedPercentageDecimal() * 100).isNaN)
+        ? '0%'
+        : "${(getRedPercentageDecimal() * 100).toStringAsFixed(1)}%";
   }
 
   getGreenLogItems() {
-    var greenLog = _log
+    return _log
         .where((logItem) => logItem.getColorFromDensity() == 'green')
         .toList();
-    return greenLog;
   }
 
   getYellowLogItems() {
-    var yellowLog = _log
+    return _log
         .where((logItem) => logItem.getColorFromDensity() == 'yellow')
         .toList();
-    return yellowLog;
   }
 
   getOrangeLogItems() {
-    var orangeLog = _log
+    return _log
         .where((logItem) => logItem.getColorFromDensity() == 'orange')
         .toList();
-    return orangeLog;
   }
 
   getRedLogItems() {
-    var redLog = _log
+    return _log
         .where((logItem) => logItem.getColorFromDensity() == 'red')
         .toList();
-    return redLog;
   }
 
   num getTotalCalories() {

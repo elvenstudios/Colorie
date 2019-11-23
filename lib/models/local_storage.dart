@@ -31,8 +31,12 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
-    await db.execute(
-        "CREATE TABLE Log(id INTEGER PRIMARY KEY,foodName TEXT,calories REAL ,grams REAL ,createDateTime TEXT)");
+    await db.execute("CREATE TABLE Log("
+        "id INTEGER PRIMARY KEY,"
+        "foodName TEXT,"
+        "calories REAL ,"
+        "grams REAL ,"
+        "createDateTime TEXT)");
   }
 
   Future<int> saveLog(LogItem item, day) async {

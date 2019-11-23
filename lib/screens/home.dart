@@ -226,7 +226,9 @@ class _HomeState extends State<Home> {
                 ),
                 child: Consumer<LogProvider>(
                   builder: (context, logProvider, __) {
-                    return CardList(list: logProvider.currentDayLog());
+                    return CardList(
+                      list: logProvider.currentDayLog(),
+                    );
                   },
                 ),
               )
